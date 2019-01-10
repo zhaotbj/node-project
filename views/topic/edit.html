@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+  {{include '../_includes/header.html'}}
+  <section class="container">
+  <div class="row">
+    <div class="col-md-5">
+      {{ if !topic }}
+      编辑的话题已不存在！
+      {{ else if topic.userId !== sessionUser.id }}
+      你没有权限执行该操作！
+      {{ else }}
+      <form id="form" action="/topic/{{ topic.id }}/edit">
+        <!-- 表单隐藏域 -->
+        <input type="hidden" id="topic_id" value="{{ topic.id }}">
+        <div class="form-group">
+          <label for="title">标题</label>
+          <input type="text" class="form-control" id="title" name="title" value="{{ topic.title }}">
+        </div>
+        <div class="form-group">
+          <label for="content">内容</label>
+          <textarea class="form-control" id="content" name="content" rows="10">{{ topic.content }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-default">提交</button>
+      </form>
+      {{ /if }}
+    </div>
+  </div>
+</section>
+  {{include '../_includes/footer.html'}}
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script src="/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+  <script>
+    $('#form').on('submit', handleSubmit)
+
+    function handleSubmit(e) {
+      e.preventDefault()
+      var formData = $(this).serialize()
+      var url = $(this).attr('action') // /topic/xx/edit
+      $.post(url, formData, function (data) {
+        if (data.code === 200) {
+          // 修改成功，重新回到话题的详情页
+          window.location.href = '/topic/' + $('#topic_id').val()
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>

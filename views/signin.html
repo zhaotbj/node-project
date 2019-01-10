@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="/public/css/login.css">
+</head>
+
+<body>
+  <div class="main">
+    <div class="header">
+      <a href="/">
+        <img src="#" alt="">
+      </a>
+      <h1>用户登录</h1>
+    </div>
+    <form id="signin_form">
+      <div class="form-group">
+        <label for="email">邮箱</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Email" autofocus>
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <a class="pull-right" href="">忘记密码？</a>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+      </div>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox">记住我
+        </label>
+      </div>
+      <button type="submit" class="btn btn-success btn-block">登录</button>
+    </form>
+    <div class="message">
+      <p>没有账号? <a href="/signup">点击创建</a>.</p>
+    </div>
+  </div>
+  <script src="/node_modules/jquery/dist/jquery.js"></script>
+  <script>
+    $('#signin_form').on('submit', handleSubmit)
+
+    function handleSubmit (e) {
+      e.preventDefault()
+      var formData = $(this).serialize()
+      $.post('/signin', formData, function (data) {
+        console.log(data)
+        switch(data.code) {
+          case 200:
+            window.location.href = '/'
+            break
+          case 1:
+            window.alert('用户名不存在')
+            break
+          case 2:
+            window.alert('密码不正确')
+            break
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>
