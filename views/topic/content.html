@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<link rel="stylesheet" href="../../public/css/index.css">
+
+
+<body>
+    <header>
+      <div class="header-container">
+      <a class="log" href=""></a>
+      <ul class="right-header">
+        <li class="item"><a class="a-link active" href="/">首页</a></li>
+        <li class="item"><a class="a-link" href="/">归档</a></li>
+        <li class="item"><a class="a-link" href="/">关于</a></li>
+        <li class="item"><a class="a-link" href="/">标签</a></li>
+      </ul>
+    </div>
+    </header>
+    <main>
+    
+      <div class="article">
+          
+        <section>
+            {{each }}
+            {{$value.content}}
+            {{/each}}
+        </section>
+       
+      </div>
+      <aside>
+          <div class="aside-describe">
+            <div class="aside-form">
+              <form action="">
+                  <input class="aside-search" type="text" placeholder="Searchs">
+              </form>
+            </div>
+            <div class="aside-img">
+                <img src="../../public/img/timg.jpg" alt="">
+                <p class="aside-name">签名</p>
+            </div>
+          </div>
+        </aside>
+    </main>
+   
+  </body>
+  
+</html>

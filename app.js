@@ -16,7 +16,7 @@ const options = {
   password: '123456',
   database: '2019'
 }
-// const sessionStore = new MySQLStore(options)
+const sessionStore = new MySQLStore(options)
 const app = express()
 
 // app.use(morgan('tiny'))

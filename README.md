@@ -1,2 +1,2 @@
 # node-blog
-node.js koajs ejs mysql
+node.js express express-art-template mysql
