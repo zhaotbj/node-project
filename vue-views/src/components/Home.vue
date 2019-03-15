@@ -1,24 +1,23 @@
 <template>
  <el-container>
   <el-header>
-
     <el-row>
       <el-col :span="12">
         <div class="">
           <el-col :span="10"  ><div class="">博客</div></el-col>
           <el-col :span="12" ><div class="">
-            <el-input v-model="input" placeholder="请输入内容"></el-input></div>
+            <el-input class="search_input" v-model="input" placeholder="请输入内容"></el-input></div>
             </el-col>
         </div>
         </el-col>
       <el-col :span="12">
         <div class="">
-          <el-col :span="6"><div class="header_title"><a href="javascript:;">首页</a></div></el-col>
-          <el-col :span="4"><div class="header_title"><a href="javascript:;">归档</a></div></el-col>
-          <el-col :span="4"><div class="header_title"><a href="javascript:;">分类</a></div></el-col>
-          <el-col :span="4"><div class="header_title"><a href="javascript:;">关于</a></div></el-col>
-          <el-col :span="2"><div class="header_title"><a href="javascript:;">登录</a></div></el-col>
-          <el-col :span="2"><div class="header_title">注册</div></el-col> 
+          <el-col :span="6"><div class="header_title"><router-link to="/">首页</router-link></div></el-col>
+          <el-col :span="4"><div class="header_title"><router-link to="/archives">归档</router-link></div></el-col>
+          <el-col :span="4"><div class="header_title"><router-link to="/categories">分类</router-link></div></el-col>
+          <el-col :span="4"><div class="header_title"><router-link to="/about">关于</router-link></div></el-col>
+          <el-col :span="2"><div class="header_title"><router-link to="/">登录</router-link></div></el-col>
+          <el-col :span="2"><div class="header_title"><router-link to="/">注册</router-link></div></el-col> 
           </div>
         </el-col>
     </el-row>
@@ -26,7 +25,10 @@
   <el-container>
     <el-aside width="260px">Aside</el-aside>
     <el-container>
-      <el-main>Main</el-main>
+      <el-main>
+        <blog-list></blog-list>
+         <router-view></router-view>
+      </el-main>
       <!-- <el-footer>Footer</el-footer> -->
     </el-container>
   </el-container>
@@ -34,20 +36,21 @@
 </template>
 
 <script>
+import BlogList from '@/components/bloglist'
 export default {
   name: 'Home',
+  components: {
+    BlogList
+  },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
       input: ''
     }
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
+<style lang="less">
 .el-header, .el-footer {
     padding: 0 0;
     background-color: #fff;
@@ -71,8 +74,6 @@ export default {
   
   .el-main {
     background-color: #fff;
-    color: #333;
-    text-align: center;
     height: calc(100vh - 104px);
     overflow: auto;
   }
@@ -90,7 +91,23 @@ export default {
   .el-container:nth-child(7) .el-aside {
     line-height: 320px;
   }
-  .header_title a {
-    color: #1890FD;
+  .header_title  {
+    a {
+      display: block;
+      
+    }
+    a:hover {
+      color: #1890FD;
+      border-top: 1px solid #1890FD;
+    }
+    
+  }
+  .search_input {
+    .el-input__inner {
+      border: none;
+    }
+    
   }
 </style>
+
+
