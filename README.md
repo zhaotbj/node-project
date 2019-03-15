@@ -1,21 +1,38 @@
-# node
+# 博客介绍
 
-> A Vue.js project
+- 前后端分离开发
 
-## Build Setup
+> 默认是后台目录， 其中vue-views目录下是前端代码
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
+# 启动项目
+- node项目
+```
+node app.js
+默认是3000端口
+```
+- vue项目
+```
+cd 进入 vue-views目录下
 npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
+默认是8080端口
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# 技术栈
+- 前端
+  + vue
+  + vue-router
+  + axios
+  + element-ui
+
+- 后端
+  + koa2 + koa-router
+  + mongoDB 
+
+# 实现功能
+
+- [ ] 主页+ 列表页+ 侧边栏+ 搜索
+- [ ] 上传文件
+- [ ] 登录， 注册
+- [ ] 增删改查
+- [ ] 标签， 分类
+- [ ] 评论
