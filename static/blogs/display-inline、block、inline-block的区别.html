@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>display:inline、block、inline-block的区别</title>
+<link rel="stylesheet" href="../css/blog-theme.css" />
+<script type="text/javascript" src="../js/MathJax.js"></script>
+</head>
+<body><div class="container"><p>display:block就是将元素显示为块级元素.</p>
+
+<p>　　block元素的特点是： <br>
+　　总是在新行上开始； <br>
+　　高度，行高以及顶和底边距都可控制； <br>
+　　宽度缺省是它的容器的100%，除非设定一个宽度 <br>
+　　</p>
+
+<pre><code>&lt;div&gt;, &lt;p&gt;, &lt;h1&gt;, &lt;form&gt;, &lt;ul&gt; 和 &lt;li&gt;
+</code></pre>
+
+<p>　　是块元素的例子。</p>
+
+<p>　　display:inline就是将元素显示为行内元素.</p>
+
+<p>　　inline元素的特点是：  <br>
+　　和其他元素都在一行上； <br>
+　　高，行高及顶和底边距不可改变； <br>
+　　宽度就是它的文字或图片的宽度，不可改变。 <br>
+　　</p>
+
+<pre><code>&lt;span&gt;, &lt;a&gt;, &lt;label&gt;, &lt;input&gt;, &lt;img&gt;, &lt;strong&gt; 和&lt;em&gt;
+</code></pre>
+
+<p>　　是inline元素的例子。</p>
+
+<p>　　inline和block可以控制一个元素的行宽高等特性，需要切换的情况如下：</p>
+
+<blockquote>
+  <ul>
+  <li>让一个inline元素从新行开始； 　　</li>
+  <li>让块元素和其他元素保持在一行上； 　</li>
+  <li>控制inline元素的宽度（对导航条特别有用）；</li>
+  <li>控制inline元素的高度； 　　</li>
+  <li>无须设定宽度即可为一个块元素设定与文字同宽的背景色。</li>
+  </ul>
+</blockquote>
+
+<p>　　display:inline-block将对象呈递为内联对象，但是对象的内容作为块对象呈递。旁边的内联对象会被呈递在同一行内，允许空格。</p>
+
+<p>　　inline-block的元素特点：</p>
+
+<p>　　将对象呈递为内联对象，但是对象的内容作为块对象呈递。旁边的内联对象会被呈递在同一行内，允许空格。(准确地说，应用此特性的元素呈现为内联对象，周围元素保持在同一行，但可以设置宽度和高度地块元素的属性)</p>
+
+<p>　　并不是所有浏览器都支持此属性，目前支持的浏览器有：Opera、Safari在IE中对内联元素使用display:inline-block，IE是不识别的，但使用display:inline-block在IE下会触发layout，从而使内联元素拥有了display:inline-block属性的表症。从上面的这个分析，也不难理解为什么IE下，对块元素设置display:inline-block属性无法实现inline-block的效果。这时块元素仅仅是被display:inline-block触发了layout，而它本就是行布局，所以触发后，块元素依然还是行布局，而不会如Opera中块元素呈递为内联对象。</p>
+
+<p>　　IE下块元素如何实现display:inline-block的效果？</p>
+
+<p>　　有两种方法： <br>
+　　1、先使用display:inline-block属性触发块元素，然后再定义display:inline，让块元素呈递为内联对象（两个display要先后放在两个CSS声明中才有效果，这是IE的一个经典bug，如果先定义了display:inline-block，然后再将display设回inline或block，layout不会消失）。代码如下（…为省略的其他属性内容）：</p>
+
+<p>　　div {display:inline-block;…}  <br>
+　　div {display:inline;}</p>
+
+<p>　　2、直接让块元素设置为内联对象呈递（设置属性display:inline），然后触发块元素的layout（如：zoom:1等）。代码如下：</p>
+
+<p>　　div {display:inline; zoom:1;…}</p></div></body>
+</html>

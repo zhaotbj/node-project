@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <p>blogList</p>
+<ul>
+   <% for(var i=0;i<results.length;i++){%>
+    <li id="<%= results[i].id %>" class="<%= results[i].kind %>"><%= results[i].title %></li>
+    <%}%>
+</ul>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+    $("li").click(function(){
+        $.get("/blog/"+$(this).attr('id'), function(result){
+            console.log("done");
+        });
+    });
+</script>
+</body>
+</html>

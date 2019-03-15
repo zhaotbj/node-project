@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript">
+
+    </script>
+</head>
+<body>
+    <form id="form1" action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="uploadFile"/>
+        <br/>
+        <input type="text" name="kind">
+        <input type="button" value="submit" id="sbtn" onclick = "submitForm();"/>
+    </form>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript">
+        function submitForm(){
+            var uploadFile = document.getElementById("uploadFile");
+            var file = uploadFile.files[0];
+            var type = file.type;//例如 text/html
+            var fileSize = file.size;
+            //文件大小超过100k
+//            if(fileSize > 100*1024 || type!= "text/html"){//读者可自行补充条件
+//                //TODO 进一步处理
+//               alert("file type/size error,please check.")
+//                return;
+//            }
+            $("#form1").submit();
+        }
+    </script>
+</body>
+</html>

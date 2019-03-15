@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>建立自己的cdn文件库</title>
+<link rel="stylesheet" href="../css/blog-theme.css" />
+<script type="text/javascript" src="../js/MathJax.js"></script>
+</head>
+<body><div class="container"><p>在前端开发过程中，每次新建一个工程，都要费时费力地把一些js库拷贝到工程目录下，要么就是用相对路径一层层地找， <br>
+然而如果自己能有个cdn库，需要的时候只需要引用在线的库文件就好了</p>
+
+<p>这里使用的是阿里云+nodejs的环境，具体的配置见 <br>
+<a href="http://likaiboy.com/blogs/Node.js%E7%AC%94%E8%AE%B0%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E9%98%BF%E9%87%8C%E4%BA%91%E9%83%A8%E7%BD%B2Node.js%E6%9C%8D%E5%8A%A1%E5%99%A8(Windows%E7%8E%AF%E5%A2%83).html">Node.js笔记（十一）阿里云部署Node.js服务器(Windows环境)</a></p>
+
+<p>有了这样的环境，只需要简单地几步： <br>
+1. npm install -g express <br>
+2. 建立server.js <br>
+3. node server.js</p>
+
+<p>server.js代码如下：</p>
+
+<pre><code>var express = require('express');
+var app = express();
+var http = require('http');
+var serveStatic = require('serve-static');
+app.use(serveStatic(__dirname + '/public'));
+var port = 3000;
+
+var httpServer = http.createServer(app);    
+httpServer.listen(port, null, function() {
+console.log('HTTP server started: http://localhost:' + port);
+});
+</code></pre>
+
+<p>接下来只要把你的库文件扔进public文件夹里就能访问啦 <br>
+比如说我把一个page.css扔进了public/css下 <br>
+就可以用</p>
+
+<pre><code>&lt;link href="http://likaiboy.com/css/page.css" rel="stylesheet"&gt;
+</code></pre>
+
+<p>来引用这个文件</p></div></body>
+</html>
