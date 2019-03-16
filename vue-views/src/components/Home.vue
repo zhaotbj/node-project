@@ -26,8 +26,9 @@
     <el-aside width="260px">Aside</el-aside>
     <el-container>
       <el-main>
-        <blog-list></blog-list>
+        <blog-list v-show="display" @event_home="event_home"></blog-list>
          <router-view></router-view>
+         
       </el-main>
       <!-- <el-footer>Footer</el-footer> -->
     </el-container>
@@ -44,9 +45,24 @@ export default {
   },
   data () {
     return {
-      input: ''
+      input: '',
+      display: true,
+      name: 'Home'
     }
+  },
+  computed: {
+    comName() {
+      return this.$route.name
+    }
+  },
+  watch: {
+    comName(value) {
+       value===this.name ? this.display=true : this.display=false
+    }
+  },
+  methods: {
   }
+ 
 }
 </script>
 
@@ -108,6 +124,7 @@ export default {
     }
     
   }
+  
 </style>
 
 

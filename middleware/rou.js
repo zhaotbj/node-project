@@ -2,7 +2,6 @@ const router = require('koa-router')()
 const dbAPI = require('./db');
 const dealUpload = require('./upload');
 router.get('/', async(ctx, next) => {
-  // let res = await dbAPI.readBlog(0)
   //TODO
   const results = await dbAPI.getBlogList('/');
     ctx.body = {
@@ -96,8 +95,27 @@ router.get("/uploadBlog",async (ctx,next)=>{
 router.post("/upload",(ctx,next)=>{
   dealUpload(ctx);
 })
-router.get("/read",async (ctx,next)=>{
-  var result =  await dbAPI.readBlog();
-  ctx.body=result.content;
+const formidable = require("formidable");
+
+/* var blogSchema = new mongoose.Schema({
+  content:String,
+  id:String
+});
+var blog = db.model("blog",blogSchema,"blog") */
+router.post("/save", async(ctx, next)=>{
+  let {content} = ctx.request.body
+  const res = await dbAPI.saveBlogs(content,11)
+  ctx.body=res
+})
+
+router.post("/article",async (ctx,next)=>{
+  let = {id} =ctx.request.body 
+  console.log(ctx.request.body, ' article')
+  var result =  await dbAPI.readBlog(id);
+  // ctx.body=result.content;
+  ctx.body={
+    Status: 200,
+    Ret: result
+  }
 })
 module.exports = router

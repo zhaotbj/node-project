@@ -26,13 +26,13 @@ var blogListSchema = new mongoose.Schema({
   id: String
 });
 var blogList = db.model("blogList", blogListSchema, "blogList")
-// var blog = new blogList({ title: '我是标题', kind: '我是分类', id: 0 })
-// blog.save(function(err) {
-//   if(err) {
-//     return err
-//   }
-//   console.log('保存了1')
-// })
+/* var blog = new blogList({ title: '我是标题', kind: '我是分类', id: 0 })
+blog.save(function(err) {
+  if(err) {
+    return err
+  }
+  console.log('保存了1')
+}) */
 
 var blogSchema = new mongoose.Schema({
   content:String,
@@ -94,11 +94,21 @@ async function saveBlog(path,id){
 }
 async function readBlog(id){
   let content;
+  console.log('id---',id)
   await blog.find({id:id}).then(function (doc) {
-      content = doc[0];
+      content = doc
       console.log('内容', doc)
   })
   return content;
+}
+async function saveBlogs(content, id){
+  var query = new blog({content:content,id:id});
+  query.save(function(err){
+      if(err) return;
+      console.log("save done");
+
+  })
+
 }
 
 var dbAPI = {
@@ -108,7 +118,8 @@ var dbAPI = {
   // deleteBlogId:deleteBlogId,
   // modifyBlogKind:modifyBlogKind,
   saveBlog:saveBlog, 
-  readBlog:readBlog
+  readBlog:readBlog,
+  saveBlogs: saveBlogs
 }
 
 module.exports = dbAPI;
