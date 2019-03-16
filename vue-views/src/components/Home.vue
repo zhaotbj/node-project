@@ -23,7 +23,7 @@
     </el-row>
   </el-header>
   <el-container>
-    <el-aside width="260px">Aside</el-aside>
+    <el-aside width="260px"><aside-blog></aside-blog></el-aside>
     <el-container>
       <el-main>
         <blog-list v-show="display"></blog-list>
@@ -38,16 +38,17 @@
 
 <script>
 import BlogList from '@/components/bloglist'
+import AsideBlog  from '@/components/asideBlog'
 export default {
   name: 'Home',
   components: {
-    BlogList
+    BlogList,
+    AsideBlog
   },
   data () {
     return {
       input: '',
-      display: true,
-      name: 'Home'
+      display: false
     }
   },
   computed: {
@@ -57,7 +58,7 @@ export default {
   },
   watch: {
     comName(value) {
-       value===this.name ? this.display=true : this.display=false
+       value==='Home' ? this.display=true : this.display=false
     }
   },
   methods: {
