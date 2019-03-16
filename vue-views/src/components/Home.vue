@@ -12,11 +12,11 @@
         </el-col>
       <el-col :span="12">
         <div class="">
-          <el-col :span="6"><div class="header_title"><router-link to="/">首页</router-link></div></el-col>
-          <el-col :span="4"><div class="header_title"><router-link to="/archives">归档</router-link></div></el-col>
-          <el-col :span="4"><div class="header_title"><router-link to="/categories">分类</router-link></div></el-col>
-          <el-col :span="4"><div class="header_title"><router-link to="/about">关于</router-link></div></el-col>
-          <el-col :span="2"><div class="header_title"><router-link to="/">登录</router-link></div></el-col>
+          <el-col :span="6"><div class="header_title"><router-link :class="{bg_color: comName==='Home'}" to="/">首页</router-link></div></el-col>
+          <el-col :span="4"><div class="header_title"><router-link :class="{bg_color: comName==='Archives'}" to="/archives">归档</router-link></div></el-col>
+          <el-col :span="4"><div class="header_title"><router-link :class="{bg_color: comName==='Categories'}" to="/categories">分类</router-link></div></el-col>
+          <el-col :span="4"><div class="header_title"><router-link :class="{bg_color: comName==='About'}" to="/about">关于</router-link></div></el-col>
+          <el-col :span="2"><div class="header_title"><router-link :class="{bg_color: comName==='1'}" to="/upload">登录</router-link></div></el-col>
           <el-col :span="2"><div class="header_title"><router-link to="/">注册</router-link></div></el-col> 
           </div>
         </el-col>
@@ -26,7 +26,7 @@
     <el-aside width="260px">Aside</el-aside>
     <el-container>
       <el-main>
-        <blog-list v-show="display" @event_home="event_home"></blog-list>
+        <blog-list v-show="display"></blog-list>
          <router-view></router-view>
          
       </el-main>
@@ -113,6 +113,10 @@ export default {
       
     }
     a:hover {
+      color: #1890FD;
+      border-top: 1px solid #1890FD;
+    }
+    .bg_color {
       color: #1890FD;
       border-top: 1px solid #1890FD;
     }

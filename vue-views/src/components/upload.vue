@@ -1,7 +1,8 @@
 <template>
   <div>
+    <el-input class="article_title" v-model="title" placeholder="请输入标题"></el-input>
   <vue-editor @imageAdded="handleImageAdded" v-model="htmlForEditor"></vue-editor>
-  <button @click="subm">12121212</button>
+  <el-button type="success"  @click="subm">保存</el-button>
   </div>
   
 </template>
@@ -14,7 +15,7 @@ export default {
 
   data() {
     return {
-      content: "<h1>Some initial content</h1>",
+      title: '',
       htmlForEditor: ''
     };
   },
@@ -29,15 +30,23 @@ export default {
 
         var formData = new FormData();
         formData.append('file', file)
-        console.log(formData)
-        // this.$http.post('/save', JSON.stringify({data: file}))
-        // return
+        formData.append('title', this.title)
+        
         this.$http({
           url: '/save',
           method: 'POST',
-          data: {content: file}
+          data: {content: file, title: this.title}
         })
         .then((result) => {
+          let {Status} = result.data
+          if(Status ===200) {
+            this.$message({
+            message: '保存成功！',
+            type: 'success'
+          });
+          this.title=''
+          this.htmlForEditor= ''
+          }
           /* let url = result.data.url // Get url from response
           Editor.insertEmbed(cursorLocation, 'image', url);
           resetUploader(); */
@@ -50,3 +59,11 @@ export default {
 
 };
 </script>
+<style lang="less">
+.article_title {
+  text-align: center;
+  .el-input__inner {
+    width: 300px;
+  }
+}
+</style>

@@ -5,7 +5,7 @@ import Home from '@/components/Home'
 import Archives from '@/components/archives'
 import Categories from '@/components/categories'
 import About from '@/components/about'
-import saveArticles from '@/components/saveArticles'
+import upload from '@/components/upload'
 import article from  '@/components/article'
 Vue.use(Router)
 
@@ -17,9 +17,9 @@ export default new Router({
       component: Home,
       children: [
         {
-          path: 'save',
-          name: 'saveArticles',
-          component: saveArticles
+          path: 'upload',
+          name: 'upload',
+          component: upload
         },
         {
           path: '/article/:id',

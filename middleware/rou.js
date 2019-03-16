@@ -3,7 +3,8 @@ const dbAPI = require('./db');
 const dealUpload = require('./upload');
 router.get('/', async(ctx, next) => {
   //TODO
-  const results = await dbAPI.getBlogList('/');
+  // const results = await dbAPI.getBlogList('/');
+  const results = await dbAPI.getAllBlogs()
     ctx.body = {
       Status: 200,
       Res: results
@@ -103,9 +104,26 @@ const formidable = require("formidable");
 });
 var blog = db.model("blog",blogSchema,"blog") */
 router.post("/save", async(ctx, next)=>{
-  let {content} = ctx.request.body
-  const res = await dbAPI.saveBlogs(content,11)
-  ctx.body=res
+  let {content, title} = ctx.request.body
+  const id = await dbAPI.queryBlogMaxID()
+  var d= new Date()
+
+  var year = d.getFullYear()
+  // 月份比较特殊， 0是一月11是12月
+  var month = d.getMonth() +1;
+  month = month<10? '0'+month: month
+  var day = d.getDate()
+  day = day<10? '0'+day : day
+  var hours = d.getHours()
+  var mins = d.getMinutes()
+  mins = mins<10? '0'+mins :mins
+  let time= year+'-'+month+'-'+day+' '+ hours+':'+ mins
+
+  const res = await dbAPI.saveBlogs(content,Number(id)+1, time, title)
+  ctx.body={
+    Status: 200,
+    Ret: res
+  }
 })
 
 router.post("/article",async (ctx,next)=>{

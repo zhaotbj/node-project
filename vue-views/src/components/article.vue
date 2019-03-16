@@ -1,5 +1,6 @@
 <template>
   <div id="editor" class="article_content">
+    <h1 class="article_title">{{title}}</h1>
     <div v-html="article"></div>
   </div>
 </template>
@@ -8,6 +9,7 @@
 export default {
   data() {
     return {
+      title: '',
       article: ''
     };
   },
@@ -23,6 +25,7 @@ export default {
        console.log(Status, Ret)
       if(Status===200) {
         this.article = Ret[0].content
+        this.title = Ret[0].title
       }
      })
     }
@@ -32,6 +35,12 @@ export default {
 
 <style lang="less" >
 #editor {
+  .article_title {
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-align: center;
+    line-height: 3;
+  }
   .ql-syntax {
     /* overflow-x: auto;
     color: #525252;
@@ -55,8 +64,8 @@ export default {
   }
   h1, h2, h3, h4 {
   color: #111111;
-  font-weight: 400;
-  margin-top: 1em;
+  font-weight: bold;
+
   
 h1, h2, h3, h4, h5 {
 font-family: Georgia, Palatino, serif;

@@ -1,24 +1,24 @@
 <template>
   <div class="list">
-    <button @click="handle">btn</button>
     <ul>
-      <li class="list_item" v-for="(item, index) in listData" :key="index">
+      <li class="list_item" v-for="(item, index) in listData" :key="index"
+        @click="handleItem(item.id)">
         <p class="date">2019年3月15日</p>
         <div class="description">
-          <p @click="handleItem(item.id)">{{item.title}}</p>
+          <h2 class="item_title">{{item.title}}</h2>
         </div>
-        <div class="summary">
-          <p @click="handleItem(item.id)">{{item.summary}}</p>
+        <div class="summary" v-html="item.content">
+          
         </div>
         <div class="list-item-action">
           <p>
-            <i class="el-icon-date"></i> posted @ 2019-03-15
+            <i class="el-icon-date"></i> posted @ {{item.time}}
           </p>
           <p>阅读10</p>
           <p>评论10</p>
         </div>
       </li>
-      <li class="list_item">
+      <!-- <li class="list_item">
         <p class="date">2019年3月15日</p>
         <div class="description">
           <router-link to="/">我是标题</router-link>
@@ -33,7 +33,7 @@
           <p>阅读10</p>
           <p>评论10</p>
         </div>
-      </li>
+      </li> -->
     </ul>
   </div>
 </template>
@@ -50,9 +50,9 @@ export default {
   methods: {
     handle() {
       this.$http.get("/").then(res => {
-        let result = res.data
-        if(result.Status ===200) {
-          this.listData= result.Res
+        let {Status, Res} = res.data
+        if(Status ===200) {
+          this.listData= Res
         }
       });
     },
@@ -69,42 +69,42 @@ export default {
 .list {
   font-size: 13px;
   .list_item {
-    height: 120px;
+    height: 130px;
     border: 1px dashed #ebedf0;
     padding: 10px 10px;
+    cursor: pointer;
     .date {
       color: #399ab2;
     }
     .description {
       cursor: pointer;
-      max-height: 260px;
+ 
       line-height: 2;
       border-left: 3px solid #9cba39;
       padding: 0 6px;
-      a {
+      .item_title {
         color: #9cba39;
       }
     }
     .summary {
       //  color: rgb(163, 163, 163);
-      line-height: 1.5;
-      margin-top: 10px;
-      p {
-        width: 100%;
+      // line-height: 1.5;
+  
+      width: 100%;
+      height: 50px;
         /* 类似于display: flex */
         display: -webkit-box;
         /* 类似于flex-dircection */
         /* 垂直的，竖立的; */
         -webkit-box-orient: vertical;
         /* 设定文字显示几行 */
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
         overflow: hidden;
-      }
     }
     .list-item-action {
       display: flex;
       justify-content: flex-start;
-      margin-top: 15px;
+      margin-top: 6px;
       line-height: 1.5;
       color: #a3a3a3;
       p {

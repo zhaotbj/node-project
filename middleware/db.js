@@ -36,7 +36,9 @@ blog.save(function(err) {
 
 var blogSchema = new mongoose.Schema({
   content:String,
-  id:String
+  id:String,
+  time: String,
+  title: String
 });
 var blog = db.model("blog",blogSchema,"blog")
 // var blog1 =new blog({content: '我是内容我是内容我是内容我是内容', id: 0})
@@ -44,6 +46,13 @@ var blog = db.model("blog",blogSchema,"blog")
 //   console.log('保存了111')
 // })
 
+async function getAllBlogs() {
+  let res= []
+  await blog.find().then(function(doc) {
+    res= doc
+  })
+  return res
+}
 async function getBlogList(kind) {
   let query = {}
   let results=[]
@@ -58,6 +67,19 @@ async function getBlogList(kind) {
   return results
 }
 
+async function queryBlogMaxID(){
+  let temp = 0;
+  await  blog.find({}).sort({'id':-1}).limit(1).then(function(doc){
+     if(doc.length>0){
+         temp = doc[0].id
+     }else{
+         console.log("collection is empty");
+     }
+     console.log('temp', temp)
+  });
+  return temp;
+}
+
 async function queryMaxID(){
   let temp = 0;
   await  blogList.find({}).sort({'id':-1}).limit(1).then(function(doc){
@@ -69,6 +91,7 @@ async function queryMaxID(){
   });
   return temp;
 }
+
 async function insertBlogList(title,kind){
   let value =  await queryMaxID();
    var record = new blogList({title: title, kind: kind, id: ++value});
@@ -94,24 +117,26 @@ async function saveBlog(path,id){
 }
 async function readBlog(id){
   let content;
-  console.log('id---',id)
+
   await blog.find({id:id}).then(function (doc) {
       content = doc
       console.log('内容', doc)
   })
   return content;
 }
-async function saveBlogs(content, id){
-  var query = new blog({content:content,id:id});
+async function saveBlogs(content, id, time, title){
+  var query = new blog({content:content,id:id, time: time, title:title});
   query.save(function(err){
       if(err) return;
       console.log("save done");
-
+    return 'success'
   })
 
 }
 
 var dbAPI = {
+  getAllBlogs: getAllBlogs,
+  queryBlogMaxID: queryBlogMaxID,
 //  validate:validateLogin,
   getBlogList:getBlogList,
   insertBlogList:insertBlogList,
