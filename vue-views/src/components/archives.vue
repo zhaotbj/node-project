@@ -10,10 +10,10 @@
 
   <el-timeline :reverse="reverse">
     <el-timeline-item
-      v-for="(activity, index) in activities"
+      v-for="(item, index) in activities"
       :key="index"
-      :timestamp="activity.timestamp">
-      {{activity.content}}
+      :timestamp="item.time" @click.native="lookArticle(item.id)">
+      {{item.title}}
     </el-timeline-item>
   </el-timeline>
 </div>
@@ -26,28 +26,28 @@
       return {
         reverse: true,
         activities: [{
-          content: '活动按期开始',
-          timestamp: '2018-04-15'
-        }, {
-          content: '通过审核',
-          timestamp: '2018-04-13'
-        }, {
-          content: '创建成功',
-          timestamp: '2018-04-11'
+          title: '活动按期开始',
+          time: '2018-04-15'
         }]
       };
     },
     created() {
       this.init()
+      
     },
     methods: {
       init() {
         this.$http.get("/archives").then(res => {
-        let {Status, Res} = res.data
+        let {Status, Ret} = res.data
         if(Status ===200) {
-          this.activities= Res
+          this.activities= Ret
         }
       });
+      },
+      lookArticle(id) {
+        console.log(id,'ssss')
+    //  this.$bus.emit('look_article', id)
+     this.$router.push({ name: 'article', params: { id }})
       }
     }
   };
@@ -55,5 +55,11 @@
 <style lang="less">
 .el-timeline-item__node {
       background-color: #1890FD;
+}
+.el-timeline-item {
+  cursor: pointer;
+}
+.el-timeline {
+  margin-top: 10px;
 }
 </style>

@@ -12,12 +12,13 @@
         </el-col>
       <el-col :span="12">
         <div class="">
-          <el-col :span="6"><div class="header_title"><router-link :class="{bg_color: comName==='Home'}" to="/">首页</router-link></div></el-col>
+          <el-col :span="5"><div class="header_title"><router-link :class="{bg_color: comName==='Home'}" to="/">首页</router-link></div></el-col>
           <el-col :span="4"><div class="header_title"><router-link :class="{bg_color: comName==='Archives'}" to="/archives">归档</router-link></div></el-col>
           <el-col :span="4"><div class="header_title"><router-link :class="{bg_color: comName==='Categories'}" to="/categories">分类</router-link></div></el-col>
           <el-col :span="4"><div class="header_title"><router-link :class="{bg_color: comName==='About'}" to="/about">关于</router-link></div></el-col>
-          <el-col :span="2"><div class="header_title"><router-link :class="{bg_color: comName==='1'}" to="/upload">登录</router-link></div></el-col>
-          <el-col :span="2"><div class="header_title"><router-link to="/">注册</router-link></div></el-col> 
+          <el-col :span="2"><div class="header_title"><router-link :class="{bg_color: comName==='upload'}" to="/upload"><span class="register">写文章</span></router-link></div></el-col> 
+          <el-col :span="2"><div class="header_title"><router-link :class="{bg_color: comName==='Login'}" to="login"><span class="login">登录</span></router-link></div></el-col>
+          <el-col :span="2"><div class="header_title"><router-link to="/"><span class="register">注册</span></router-link></div></el-col> 
           </div>
         </el-col>
     </el-row>
@@ -26,9 +27,7 @@
     <el-aside width="260px"><aside-blog></aside-blog></el-aside>
     <el-container>
       <el-main>
-        <blog-list v-show="display"></blog-list>
          <router-view></router-view>
-         
       </el-main>
       <!-- <el-footer>Footer</el-footer> -->
     </el-container>
@@ -37,18 +36,17 @@
 </template>
 
 <script>
-import BlogList from '@/components/bloglist'
+
 import AsideBlog  from '@/components/asideBlog'
+
 export default {
   name: 'Home',
   components: {
-    BlogList,
     AsideBlog
   },
   data () {
     return {
-      input: '',
-      display: false
+      input: ''
     }
   },
   computed: {
@@ -56,13 +54,8 @@ export default {
       return this.$route.name
     }
   },
-  watch: {
-    comName(value) {
-       value==='Home' ? this.display=true : this.display=false
-    }
-  },
-  methods: {
-  }
+  watch: {},
+  methods: {}
  
 }
 </script>
@@ -120,6 +113,20 @@ export default {
     .bg_color {
       color: #1890FD;
       border-top: 1px solid #1890FD;
+    }
+    .login {
+        color: #f5222d;
+        border: 1px solid #f5222d;
+        font-size: 13px;
+        padding: 2px;
+        border-radius: 5px;
+    }
+    .register {
+      color: #1890FD;
+      border: 1px solid #1890FD;
+      font-size: 13px;
+      padding: 2px;
+      border-radius: 5px;
     }
     
   }

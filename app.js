@@ -14,10 +14,11 @@ const serve = require("koa-static");
 // 设置跨域
 app.use(cors({
     origin: function (ctx) {
-        if (ctx.url === '/cors') {
+        /*if (ctx.url === '/cors') {
             return "*"; // 允许来自所有域名请求
-        }
-        return 'http://localhost:8080';
+        }*/
+        return "*";
+        // return 'http://localhost:8080';
     },
     exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
     maxAge: 5,

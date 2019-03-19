@@ -13,8 +13,15 @@ export default {
       article: ''
     };
   },
+  watch: {
+  },
   mounted() {
-    this.getArticle()
+    this.getArticle();
+    
+    /* this.$bus.on('look_article', id=> {
+     
+    }) */
+    
   },
   methods: {
     getArticle() {

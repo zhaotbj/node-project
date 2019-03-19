@@ -1,8 +1,11 @@
 <template>
   <div>
-    <el-input class="article_title" v-model="title" placeholder="请输入标题"></el-input>
+    <div class="upload_header">
+      <el-input class="article_title" v-model="title" placeholder="请输入标题"></el-input>
+    <el-button type="success"  @click="subm">发布</el-button>
+    </div>
   <vue-editor @imageAdded="handleImageAdded" v-model="htmlForEditor"></vue-editor>
-  <el-button type="success"  @click="subm">保存</el-button>
+  
   </div>
   
 </template>
@@ -60,10 +63,11 @@ export default {
 };
 </script>
 <style lang="less">
-.article_title {
-  text-align: center;
-  .el-input__inner {
-    width: 300px;
+.upload_header {
+  display: flex;
+  .article_title {
+    width: 350px;
+    margin-right: 20px;
   }
 }
 </style>

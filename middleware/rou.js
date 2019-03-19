@@ -12,14 +12,15 @@ router.get('/', async(ctx, next) => {
 });
 
 
-router.get('/login',async (ctx,next)=>{
-  return ctx.render('login');
+router.post('/login',async (ctx,next)=>{
+  
 });
 
 router.post('/login', async (ctx, next) => {
   console.log("get");
   let name = ctx.request.body.name || '',
       password = ctx.request.body.password || '';
+      console.log(name, password)
   const result = await dbAPI.validate(name,password);
   if (true) {
       ctx.cookies.set("LoginStatus",true);
@@ -32,8 +33,6 @@ router.get("/blogList",async(ctx,next)=>{
   //TODO
   const results = await dbAPI.getBlogList('/');
   ctx.body = results
-//  return ctx.render('blogList',{results:results});
-
 });
 
 
@@ -68,7 +67,6 @@ router.post("/article",async (ctx,next)=>{
   let = {id} =ctx.request.body 
   console.log(ctx.request.body, ' article')
   var result =  await dbAPI.readBlog(id);
-  // ctx.body=result.content;
   ctx.body={
     Status: 200,
     Ret: result
@@ -76,7 +74,20 @@ router.post("/article",async (ctx,next)=>{
 })
 
 router.get('/archives', async(ctx, next)=>{
-  let result =  await dbAPI.readBlog(id);
+  const results = await dbAPI.getAllBlogs()
+  let res = [];
+    for(let i=0; i<results.length; i++) {
+       let obj = {};
+      obj['title'] = results[i].title
+      obj['time'] =results[i].time
+      obj['id'] = results[i].id
+      res.push(obj)
+    }
+  console.log(res)
+  ctx.body= {
+    Status: 200,
+    Ret: res
+  }
 })
 
 

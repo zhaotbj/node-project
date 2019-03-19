@@ -9,8 +9,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/reset.css'
 
 import httpPlugin from '@/assets/http'
+import Bus from './bus'
 Vue.use(ElementUI);
 Vue.use(httpPlugin)
+Vue.use(Bus)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
