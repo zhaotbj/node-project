@@ -9,10 +9,10 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    // assetsPublicPath: '/',
     // 2019-3-19修改 打包的时候修改路径
     // https://www.cnblogs.com/hi-shepherd/p/6911098.html
-    // assetsPublicPath: './',
+    assetsPublicPath: './',
     proxyTable: {},
 
     // Various Dev Server settings
