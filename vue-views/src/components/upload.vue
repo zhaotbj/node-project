@@ -30,6 +30,18 @@ export default {
         // An example of using FormData
         // NOTE: Your key could be different such as:
         // formData.append('file', file)
+        if(!file) {
+          return
+        }
+        
+        if(this.title===''|| !this.title) {
+          this.$message({
+            message: '标题不能为空',
+            type: 'warning',
+            duration: 2000
+          });
+          return
+        }
 
         var formData = new FormData();
         formData.append('file', file)
@@ -45,7 +57,8 @@ export default {
           if(Status ===200) {
             this.$message({
             message: '保存成功！',
-            type: 'success'
+            type: 'success',
+            duration: 2000
           });
           this.title=''
           this.htmlForEditor= ''

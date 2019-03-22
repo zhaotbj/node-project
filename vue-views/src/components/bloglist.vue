@@ -46,13 +46,13 @@ export default {
   },
   created() {
     this.handle()
-  },
+      },
   methods: {
     handle() {
       this.$http.get("/").then(res => {
-        let {Status, Res} = res.data
+        let {Status, Ret} = res.data
         if(Status ===200) {
-          this.listData= Res
+          this.listData= Ret
         }
       });
     },

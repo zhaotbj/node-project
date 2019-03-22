@@ -7,7 +7,7 @@
       <h1>博客简述</h1>
       <br>
       <p>本博客使用的技术为 vue + element-ui + koa2 + mongoDB</p>
-      <p>源码地址<a class="github" href=""> github</a></p>
+      <p>源码地址<a class="github" href="https://github.com/zhaotbj/node-project">  github</a></p>
     </div>
     <div>
       <br>
@@ -22,7 +22,11 @@
 </template>
 <script>
 export default {
-  name: "About"
+  name: "About",
+  mounted() {
+
+
+  }
 };
 </script>
 

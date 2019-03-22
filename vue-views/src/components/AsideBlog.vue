@@ -9,6 +9,7 @@
           <a class="link_github" href="https://github.com/zhaotbj">github</a>
           </li>
       </ul>
+   
     
     <div class="blog_tag">
       <el-tag type="success">Vue</el-tag>
@@ -24,7 +25,17 @@
 </template>
 <script>
 export default {
-  name:'Aside'
+  name:'Aside',
+  methods: {
+    btn() {
+    this.$nextTick(()=> {
+
+    })
+  
+    this.$router.push({name: 'About'})
+
+    }
+  }
 }
 </script>
 <style lang="less">

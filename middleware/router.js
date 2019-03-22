@@ -7,7 +7,7 @@ router.get('/', async(ctx, next) => {
   const results = await dbAPI.getAllBlogs()
     ctx.body = {
       Status: 200,
-      Res: results
+      Ret: results
     }
 });
 
