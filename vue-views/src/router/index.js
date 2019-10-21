@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from '@/components/Home'
+import Home from '@/components/home'
 import BlogList from '@/components/bloglist'
 import Archives from '@/components/archives'
 import Categories from '@/components/categories'
@@ -16,7 +16,7 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home,
+      component: Home ,//()=>require('../components/home.vue'),
       children: [
         {
           path: '/',

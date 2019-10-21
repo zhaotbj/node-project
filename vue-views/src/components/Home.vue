@@ -37,7 +37,7 @@
 
 <script>
 
-import AsideBlog  from '@/components/asideBlog'
+import AsideBlog  from '../components/AsideBlog'
 
 export default {
   name: 'Home',

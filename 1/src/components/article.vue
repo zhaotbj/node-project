@@ -1,0 +1,278 @@
+<template>
+  <div id="editor" class="article_content">
+    <h1 class="article_title">{{title}}</h1>
+    <div v-html="article"></div>
+  </div>
+</template>
+<script>
+
+export default {
+  data() {
+    return {
+      title: '',
+      article: ''
+    };
+  },
+  watch: {
+  },
+  mounted() {
+    this.getArticle();
+    
+    /* this.$bus.on('look_article', id=> {
+     
+    }) */
+    
+  },
+  methods: {
+    getArticle() {
+      console.log(this.$route)
+      let {id }= this.$route.params
+     this.$http.post(`/article`, {id: id}).then(res=> {
+       let {Status, Ret} = res.data
+       console.log(Status, Ret)
+      if(Status===200) {
+        this.article = Ret[0].content
+        this.title = Ret[0].title
+      }
+     })
+    }
+  }
+};
+</script>
+
+<style lang="less" >
+#editor {
+  .article_title {
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-align: center;
+    line-height: 3;
+  }
+  .ql-syntax {
+    /* overflow-x: auto;
+    color: #525252;
+    white-space: pre;
+    padding: 1.2em 1.4em;
+    line-height: 1.5em;
+    font-size: 1em;
+    display: block;
+    color: #e96900;
+    padding: 3px 5px;
+    margin: 0 2px;
+    border-radius: 2px;
+    white-space: nowrap; */
+    padding: 10px;
+    overflow: auto;
+    margin: 20px 0;
+    font-size: 13px;
+    color: #4d4d4c;
+    background: #f7f7f7;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4 {
+  color: #111111;
+  font-weight: bold;
+
+  
+h1, h2, h3, h4, h5 {
+font-family: Georgia, Palatino, serif;
+}
+h1, h2, h3, h4, h5, dl{
+  margin-bottom: 16px;
+  padding: 0;
+}
+
+p {
+  margin-top: 8px;
+  margin-bottom: 3px;
+}
+h1 {
+  font-size: 48px;
+  line-height: 54px;
+}
+h2 {
+  font-size: 36px;
+  line-height: 42px;
+}
+h1, h2 {
+  border-bottom: 1px solid #EFEAEA;
+  padding-bottom: 10px;
+}
+h3 {
+  font-size: 24px;
+  line-height: 30px;
+}
+h4 {
+  font-size: 21px;
+  line-height: 26px;
+}
+h5 {
+  font-size: 18px;
+  line-height: 23px;
+}
+a {
+  color: #0099ff;
+  margin: 0 2px;
+  padding: 0;
+  vertical-align: baseline;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+  color: #ff6600;
+}
+a:visited {
+  /*color: purple;*/
+}
+ul, ol {
+  padding: 0;
+  padding-left: 18px;
+  margin: 0;
+}
+li {
+  line-height: 24px;
+}
+p, ul, ol {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+ol ol, ul ol {
+  list-style-type: lower-roman;
+}
+
+code, pre {
+  font-family: Consolas, Monaco, Andale Mono, monospace;
+  background-color:#f7f7f7;
+  color: inherit;
+}
+
+code {
+  font-family: Consolas, Monaco, Andale Mono, monospace;
+  margin: 0 2px;
+}
+
+pre {
+  font-family: Consolas, Monaco, Andale Mono, monospace;
+  line-height: 1.7em;
+  overflow: auto;
+  padding: 6px 10px;
+  border-left: 5px solid #6CE26C;
+}
+
+pre > code {
+  font-family: Consolas, Monaco, Andale Mono, monospace;
+  border: 0;
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: 1.6em;
+  font-size: .95em;
+  white-space: pre;
+  background: 0 0;
+
+}
+
+code {
+  color: #666555;
+}
+
+aside {
+  display: block;
+  float: right;
+  width: 390px;
+}
+blockquote {
+  border-left:.5em solid #eee;
+  padding: 0 0 0 2em;
+  margin-left:0;
+}
+blockquote  cite {
+  font-size:14px;
+  line-height:20px;
+  color:#bfbfbf;
+}
+blockquote cite:before {
+  content: '\2014 \00A0';
+}
+
+blockquote p {
+  color: #666;
+}
+hr {
+  text-align: left;
+  color: #999;
+  height: 2px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  padding: 10px 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+dd {
+  margin-left: 0;
+}
+
+table {
+  *border-collapse: collapse; /* IE7 and lower */
+  border-spacing: 0;
+  width: 100%;
+}
+table {
+  border: solid #ccc 1px;
+}
+
+table thead {
+  background: #f7f7f7;
+}
+
+table thead tr:hover {
+  background: #f7f7f7
+}
+table tr:hover {
+  background: #fbf8e9;
+  -o-transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+table td, .table th {
+  border-left: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
+
+table th {
+  border-top: none;
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+  padding: 5px;
+  border-left: 1px solid #ccc;
+}
+
+table td:first-child, table th:first-child {
+  border-left: none;
+}
+}
+}
+</style>

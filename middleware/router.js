@@ -5,6 +5,7 @@ router.get('/', async(ctx, next) => {
   //TODO
   // const results = await dbAPI.getBlogList('/');
   const results = await dbAPI.getAllBlogs()
+  console.log(results, '----')
     ctx.body = {
       Status: 200,
       Ret: results
@@ -37,7 +38,8 @@ router.get("/blogList",async(ctx,next)=>{
 
 
 router.post("/save", async(ctx, next)=>{
-  let {content, title} = ctx.request.body
+  let {content, title} = ctx.request.body;
+  console.log(content, title, '===save===')
   const id = await dbAPI.queryBlogMaxID()
   var d= new Date()
 
