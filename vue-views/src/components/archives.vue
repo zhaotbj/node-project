@@ -45,8 +45,6 @@
       });
       },
       lookArticle(id) {
-        console.log(id,'ssss')
-    //  this.$bus.emit('look_article', id)
      this.$router.push({ name: 'article', params: { id }})
       }
     }
