@@ -1,0 +1,39 @@
+.blog_aside {
+  .blog_aside_img {
+    margin-top: 20px;
+    img {
+      width: 162px;
+      height: 162px;
+      border-radius: 50%;
+    }
+  }
+  .blog_aside_link{
+    display: flex;
+    justify-content: space-around;
+    li {
+      height: 30px;
+      width: 65px;
+      .logo-img {
+      width: 30px;
+      height: 30px;
+    }
+      .octicon-mark-github {
+      margin-top: 6px;
+      }
+      .link_github {
+        font-size: 12px;
+        line-height: -4px;
+        vertical-align: super;
+        color: #a3a3a3;
+      }
+      
+    }
+    li:hover {
+       background-color:  #effbff;
+      }
+    
+  }
+  .blog_tag{
+    margin: 50% 0;
+  }
+}
