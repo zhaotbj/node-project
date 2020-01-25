@@ -25,7 +25,7 @@ cd 进入 vue_nuxt_views目录下
 npm install
 npm run dev
 ```
-React后台管理
+- React后台管理
 ```
 npm install或 yarn
 npm start或 yarn start
