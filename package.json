@@ -1,33 +1,29 @@
 {
-  "name": "05",
+  "name": "node-blog",
   "version": "1.0.0",
-  "description": "",
-  "main": "1.js",
+  "description": "```\r node app.js 或 npm run dev\r 默认是3000端口\r ```",
+  "main": "app.js",
   "scripts": {
     "dev": "node app.js",
-    "build": "webpack"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhaotbj/node-blog.git"
+  },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "ejs": "^2.6.1",
-    "formidable": "^1.2.1",
-    "koa": "^2.6.2",
-    "koa-bodyparser": "^4.2.1",
-    "koa-cors": "0.0.16",
-    "koa-ejs": "^4.2.0",
-    "koa-router": "^7.4.0",
-    "koa-static": "^5.0.0",
-    "koa-views": "^6.1.5",
-    "mongodb": "^3.1.13",
-    "mongoose": "^5.4.19",
-    "webpack": "^4.41.2"
+  "bugs": {
+    "url": "https://github.com/zhaotbj/node-blog/issues"
   },
-  "devDependencies": {
-    "babel-loader": "^8.0.6",
-    "babel-preset-es2015": "^6.24.1",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.9"
+  "homepage": "https://github.com/zhaotbj/node-blog#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "glob": "^7.1.5",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^8.0.6",
+    "koa2-cors": "^2.0.6",
+    "mongoose": "^5.8.9"
   }
 }

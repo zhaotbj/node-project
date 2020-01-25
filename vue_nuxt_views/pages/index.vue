@@ -18,7 +18,7 @@
               <el-col :span="4"><div class="header_title"><nuxt-link :class="{bg_color: comName==='Archives'}" to="/archives">归档</nuxt-link></div></el-col>
               <!-- <el-col :span="4"><div class="header_title"><nuxt-link :class="{bg_color: comName==='Categories'}" to="/categories">分类</nuxt-link></div></el-col> -->
               <el-col :span="4"><div class="header_title"><nuxt-link :class="{bg_color: comName==='About'}" to="/about">关于</nuxt-link></div></el-col>
-              <el-col :span="2"><div class="header_title"><nuxt-link :class="{bg_color: comName==='write'}" to="/write"><span class="register">写文章</span></nuxt-link></div></el-col> 
+              <!-- <el-col :span="2"><div class="header_title"><nuxt-link :class="{bg_color: comName==='write'}" to="/write"><span class="register">写文章</span></nuxt-link></div></el-col>  -->
               <el-col :span="2"><div class="header_title"><nuxt-link :class="{bg_color: comName==='Login'}" to="login"><span class="login">登录</span></nuxt-link></div></el-col>
               <el-col :span="2"><div class="header_title"><nuxt-link to="/"><span class="register">注册</span></nuxt-link></div></el-col> 
               </div>

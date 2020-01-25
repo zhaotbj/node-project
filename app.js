@@ -1,16 +1,16 @@
-const Koa = require('koa');
-const app = new Koa();
+const Koa = require('koa')
+const app = new Koa()
+const mongoose = require('mongoose')
+const { connect, initSchemas } = require("./database/init.js")
+const Router = require("koa-router")
+const bodyParser = require("koa-bodyparser")
+const cors = require("koa2-cors")
 
 
-const router = require('./middleware/router')
-const bodyParser = require('koa-bodyparser')
-const  cors = require('koa-cors');
-const views = require("koa-views");
-
-const upload = require("./middleware/upload");
-app.use(views(__dirname + "/static/html",{ extension: 'ejs' }));
-app.use(bodyParser())
-const serve = require("koa-static");
+// 处理post的参数
+app.use(bodyParser());
+// 配置跨域
+// app.use(cors())
 // 设置跨域
 app.use(cors({
     origin: function (ctx) {
@@ -26,12 +26,29 @@ app.use(cors({
     allowMethods: ['GET', 'POST', 'DELETE'], //设置允许的HTTP请求类型
     allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
   }));
+	
+    // 引入user模块
+let user = require('./api/user.js')
+let home = require('./api/home.js')
+let article = require('./api/article.js')
+    // 装载所有子路由
+let router = new Router()
+router.use("/user", user.routes())
+router.use("/home", home.routes())
+router.use("/article", article.routes())
+    // 加载路由中间件
 app.use(router.routes())
-app.use(router.allowedMethods());
-app.use(upload);
+app.use(router.allowedMethods())
 
 
-app.use(serve(__dirname+ "/static/html",{ extensions: ['html']}));
-app.listen(3000, function(){
-    console.log('listening on 3000!')
+
+;
+(async() => {
+    await connect()
+    initSchemas()
+})()
+
+
+app.listen(3002, () => {
+    console.log('starting in 3002!')
 })
