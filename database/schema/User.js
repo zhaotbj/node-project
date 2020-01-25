@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcryptjs")
 const SALT_WORK_FACTOR=10  // 设置加盐的长度
 const Scheme=mongoose.Schema // 申明scheme
 let ObjectId=Scheme.Types.ObjectId // 声明object类型
