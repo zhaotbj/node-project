@@ -1,10 +1,10 @@
 const mongoose = require('mongoose')
 const Schema=mongoose.Schema // 申明scheme
 const articleSchema = new Schema({
-  id: {type:Date, default: new Date().getTime()},
-  articleId:String,
+  id: {type: String, default: new Date().getTime().toString()},
   userId:String, // 用户id
   title: String,
+  content:String,
   image: String,
   summary: String, //文章简介
   type: Number, //  文章类型 0-博客 1-话题

@@ -1,5 +1,7 @@
 # 博客介绍
-前端展示 http://118.190.210.157:3003
+
+
+前端展示 http://118.190.210.157:8111/
 后台管理 http://118.190.210.157:8080
 该项目使用前后端分离开发，前端展示、node做后台、以及后台管理。涉及的技术
 
@@ -9,7 +11,7 @@
 ### 后台管理 React+antd  
 
 ### 目录说明：
- 默认是后台目录， 其中vue_nuxt_views目录下是前端代码
+ 默认是后台目录， 其中client目录下是前端代码
 
 后台管理项目另起仓库 https://github.com/zhaotbj/react-blog-admin 
 
@@ -21,9 +23,9 @@ node app.js 或 npm run dev
 ```
 - vue项目
 ```
-cd 进入 vue_nuxt_views目录下
+cd 进入 client目录下
 npm install
-npm run dev
+npm run serve
 ```
 - React后台管理
 ```
@@ -33,7 +35,7 @@ npm start或 yarn start
 
 # 技术栈
 - 前端
-  + vue+ nuxt.js  服务端渲染
+  + vue 
   + React全家桶
 
 - 后端

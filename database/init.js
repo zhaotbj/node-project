@@ -38,7 +38,7 @@ exports.connect = () => {
 
     //链接打开的时候
     mongoose.connection.once('open', () => {
-      console.log('MongoDB Connected successfully!')
+      console.log('MongoDB Connected successfully!----------数据库连接成功！')
       resolve()
     })
   })

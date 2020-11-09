@@ -1,5 +1,5 @@
 {
-  "name": "node-blog",
+  "name": "koa-blog",
   "version": "1.0.0",
   "description": "```\r node app.js 或 npm run dev\r 默认是3000端口\r ```",
   "main": "app.js",
@@ -19,11 +19,19 @@
   "homepage": "https://github.com/zhaotbj/node-blog#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "config-lite": "^3.0.0",
+    "ejs": "^3.1.5",
     "glob": "^7.1.5",
+    "ip": "^1.1.5",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.2.1",
+    "koa-ejs": "^4.3.0",
     "koa-router": "^8.0.6",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.3.1",
     "koa2-cors": "^2.0.6",
+    "log4js": "^6.3.0",
+    "mongolass": "^4.4.7",
     "mongoose": "^5.8.9"
   }
 }

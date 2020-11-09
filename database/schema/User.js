@@ -8,7 +8,10 @@ let ObjectId=Scheme.Types.ObjectId // 声明object类型
 const userSchema=new Scheme({
   userId: {type:String, default:new Date().getTime()},
   userName:{unique:true,type:String},
-  password:String,
+  password:{unique:true,type:String},
+  avatar: { type: String, required: false }, // 头像
+  gender: { type: String,type:String}, // 性别
+  bio: { type: String, required: false },
   createAt:{type:Date, default:Date.now()},
   lastLoginAt:{type:Date, default:Date.now()}
 })
