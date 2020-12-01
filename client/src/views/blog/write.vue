@@ -8,7 +8,7 @@
       ></el-input>
       <div class="">
         <el-button type="text" @click="subm">发布</el-button>
-        <img class="header_img" src="../static/img.jpg" alt="" />
+        <img class="header_img" src="../../static/img.jpg" alt="" />
       </div>
     </div>
     <!-- <vue-editor @imageAdded="handleImageAdded" v-model="htmlForEditor"></vue-editor> -->
@@ -30,7 +30,7 @@
 <script>
 import { VueEditor } from "vue2-editor";
 import { mapActions } from 'vuex';
-import 'github-markdown-css/github-markdown.css'  //导入
+import 'mavon-editor/dist/css/index.css'  //导入
 export default {
   components: {
     VueEditor
@@ -158,7 +158,7 @@ export default {
 
 };
 </script>
-<style scoped>
+<style lang="less" scoped>
 /deep/.el-input__inner {
   border: none;
 }

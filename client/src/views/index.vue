@@ -1,11 +1,11 @@
 <template>
-  <div class="blog_wrap">
+  <div>
     <el-container>
       <el-header class="max_header">
         <BlogHeader />
       </el-header>
-      <el-container>
-        <el-aside width="200px">
+      <el-container class="blog_content">
+        <el-aside width="300px">
           <AsideBlog />
         </el-aside>
         <el-container>
@@ -35,7 +35,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 @import url("@/assets/css/media.less");
 // .max_header {
 //   margin-top: 30px;
@@ -51,12 +51,8 @@ export default {
 /deep/.el-header .el-input__inner {
   border: none;
 }
-.blog_wrap {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-top: 20px;
-}
 .blog_content {
-  display: flex;
+  width: 1200px;
+  margin: 0 auto;
 }
 </style>

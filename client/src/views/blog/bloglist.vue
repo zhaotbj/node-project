@@ -6,9 +6,10 @@
       :key="item._id"
       @click="handleItem(item._id)"
     >
-      <p class="date">{{ item.createTime }}</p>
+      <!-- <p class="date">{{ item.createTime }}</p> -->
       <div class="description">
         <h2 class="item_title">{{ item.title }}</h2>
+        <p class="desc">我是内容描述描述描述，我是内容描述描述描述，我是内容描述描述描述，我是内容描述描述描述</p>
       </div>
       <div class="summary">
         <p>{{ item.summary }}</p>
@@ -16,7 +17,7 @@
       <div class="list-item-action">
         <p>
           <i class="el-icon-date"></i>
-          posted @ {{ item.createTime }}
+          发布时间： @ {{ item.createTime }}
         </p>
         <p>
           <span class="el-icon-chat-dot-square"></span>
@@ -25,6 +26,10 @@
         <p>
           <span class="el-icon-view"></span>
           {{ item.readNumber }}
+        </p>
+        <p>
+          
+          作者：{{ 'admin' }}
         </p>
       </div>
     </li>
@@ -77,14 +82,19 @@ export default {
       cursor: pointer;
 
       line-height: 2;
-      border-left: 3px solid #9cba39;
+      // border-left: 3px solid #9cba39;
       padding: 0 6px;
       .item_title {
-        color: #9cba39;
+        color: #333;
+        font-size: 18px;
+        font-weight: 500;
+      }
+      .desc {
+        color: #555;
       }
     }
     .summary {
-      color: #999;
+      color: #a5a5a5;
       //  color: rgb(163, 163, 163);
       // line-height: 1.5;
 
@@ -104,7 +114,7 @@ export default {
       justify-content: flex-start;
       margin-top: 6px;
       line-height: 1.5;
-      color: #a3a3a3;
+      color:#a5a5a5;
       p {
         padding: 0 5px;
       }

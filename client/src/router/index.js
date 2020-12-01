@@ -16,41 +16,40 @@ const router = new Router({
         {
           path:"/list",
           name:"list",
-          component: ()=> import("../views/bloglist.vue")
+          component: ()=> import("../views/blog/bloglist.vue")
         },
         {
           path: '/archives',
           name:"archives",
-          component: () => import("../views/index/archives.vue")
+          component: () => import("../views/blog/archives.vue")
         },
         {
           path: "/about",
           name:"about",
-          component: () => import("../views/index/about.vue")
-        },
-        {
-          path:"/write",
-          name:"write",
-          component: () => import("../views/write.vue")
+          component: () => import("../views/blog/about.vue")
         },
         {
           path:"/_id/:id",
           name:"detail",
-          component: () => import("../views/index/detail.vue")
+          component: () => import("../views/blog/detail.vue")
         },
         {
           path:"/login",
           name:"login",
-          component: () => import("../views/index/login.vue")
+          component: () => import("../views/login/login.vue")
         },
         {
           path:"/register",
           name:"register",
-          component: () => import("../views/index/register.vue")
+          component: () => import("../views/login/register.vue")
         }
       ]
+    },
+    {
+      path:"/write",
+      name:"write",
+      component: () => import("../views/blog/write.vue")
     }
-
   ]
 });
 

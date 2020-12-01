@@ -23,5 +23,8 @@ export default {
     width: 100%;
     height: 100%;
   }
+  body {
+    background-color: #f2f2f2;
+  }
 }
 </style>

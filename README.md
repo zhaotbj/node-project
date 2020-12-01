@@ -45,10 +45,10 @@ npm start或 yarn start
 # 实现功能
 
 - [x] 主页+ 列表页+ 侧边栏
-- [x] 富文本 vue2-editor
+- [x] markdown 编辑器 mavon-editor
 - [x] 登录， 注册
-- [x] 增
-- [x] 查
-- [x] 删改
+- [x] 写文章
+- [x] 首页展示
+- [x] 登录后管理员删改
 - [x] 标签， 分类
 - [ ] 评论
