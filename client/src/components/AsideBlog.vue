@@ -40,6 +40,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .blog_aside {
+  width: 300px;
   .blog_aside_img {
     margin-top: 20px;
     img {

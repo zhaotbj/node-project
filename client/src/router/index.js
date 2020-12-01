@@ -15,21 +15,22 @@ const router = new Router({
       children: [
         {
           path:"/list",
+          name:"list",
           component: ()=> import("../views/bloglist.vue")
         },
         {
           path: '/archives',
-          name:"归档",
+          name:"archives",
           component: () => import("../views/index/archives.vue")
         },
         {
           path: "/about",
-          name:"关于",
+          name:"about",
           component: () => import("../views/index/about.vue")
         },
         {
           path:"/write",
-          name:"写文章",
+          name:"write",
           component: () => import("../views/write.vue")
         },
         {
@@ -39,12 +40,12 @@ const router = new Router({
         },
         {
           path:"/login",
-          name:"登录",
+          name:"login",
           component: () => import("../views/index/login.vue")
         },
         {
           path:"/register",
-          name:"注册",
+          name:"register",
           component: () => import("../views/index/register.vue")
         }
       ]

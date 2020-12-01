@@ -1,10 +1,9 @@
 <template>
-<div class="container">
-   <el-header class="max_header">
-        <el-row>
+<div>
+  <el-row>
           <el-col :span="12">
             <div class="">
-              <el-col :span="10"><div class=""><router-link to="/" style="color:#333">{{userInfo.userName}} 的博客</router-link></div></el-col>
+              <el-col :span="10"><div class=""><router-link to="/" style="color:#333">{{userInfo.userName|| '路飞'}}的博客</router-link></div></el-col>
               <el-col :span="12"><div class="">
                 <el-input class="search_input" v-model="input" placeholder="请输入内容"></el-input></div>
                 </el-col>
@@ -12,19 +11,17 @@
             </el-col>
           <el-col :span="12">
             <div class="">
-              <el-col :span="5"><div class="header_title"><router-link :class="{bg_color: comName==='Home'}" to="/">首页</router-link></div></el-col>
-              <el-col :span="4"><div class="header_title"><router-link :class="{bg_color: comName==='Archives'}" to="/archives">归档</router-link></div></el-col>
-              <!-- <el-col :span="4"><div class="header_title"><router-link :class="{bg_color: comName==='Categories'}" to="/categories">分类</router-link></div></el-col> -->
-              <el-col :span="4"><div class="header_title"><router-link :class="{bg_color: comName==='About'}" to="/about">关于</router-link></div></el-col>
+              <el-col :span="5"><div class="header_title"><router-link :class="{bg_color: comName==='list'}" to="/">首页</router-link></div></el-col>
+              <el-col :span="4"><div class="header_title"><router-link :class="{bg_color: comName==='archives'}" to="/archives">归档</router-link></div></el-col>
+              <el-col :span="4"><div class="header_title"><router-link :class="{bg_color: comName==='about'}" to="/about">关于</router-link></div></el-col>
               <el-col :span="2"><div class="header_title"><router-link :class="{bg_color: comName==='write'}" to="/write"><span class="register">写文章</span></router-link></div></el-col> 
-              <el-col :span="2"><div class="header_title"><router-link :class="{bg_color: comName==='Login'}" to="login"><span class="login">登录</span></router-link></div></el-col>
-              <el-col :span="2"><div class="header_title"><router-link to="/register"><span class="register">注册</span></router-link></div></el-col> 
+              <el-col :span="2"><div class="header_title"><router-link :class="{bg_color: comName==='login'}" to="login"><span class="login">登录</span></router-link></div></el-col>
+              <el-col :span="2"><div class="header_title"><router-link :class="{bg_color: comName==='register'}" to="/register"><span class="register">注册</span></router-link></div></el-col> 
               <el-col :span="2"><div class="header_title"> <el-avatar class="avatar" size="medium"  :src="userInfo.avatar">{{userInfo.userName}}</el-avatar>
               </div></el-col> 
               </div>
             </el-col>
         </el-row>
-      </el-header>
   </div>
 </template>
 
@@ -53,16 +50,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-/deep/.el-header, /deep/.el-footer {
-  padding: 5px 10px;
-  background-color: #fff;
-  box-shadow: 0 2px 8px #f0f1f2;
-  text-align: center;
-  line-height: 60px;
-}
-/deep/.el-header .el-input__inner {
-  border: none;
-}
+
 /deep/.el-aside {
   background-color: #fff;
   text-align: center;
@@ -74,25 +62,6 @@ export default {
   overflow-y: auto;
 }
 
-/deep/.el-main {
-  background-color: #fff;
-  height: calc(100vh - 104px);
-  overflow: auto;
-}
-
-body > .el-container {
-  
-  margin-bottom: 40px;
-}
-
-.el-container:nth-child(5) .el-aside,
-.el-container:nth-child(6) .el-aside {
-  line-height: 260px;
-}
-
-.el-container:nth-child(7) .el-aside {
-  line-height: 320px;
-}
 .header_title  {
   font-size: 15px;
   .avatar {

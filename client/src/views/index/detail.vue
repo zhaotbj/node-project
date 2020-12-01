@@ -44,7 +44,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 #editor {
   display: flex;
   justify-content: center;

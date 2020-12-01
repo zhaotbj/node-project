@@ -2,9 +2,9 @@
   <div class="list">
     <li
       class="list_item"
-      v-for="(item, index) in listData"
-      :key="index"
-      @click="handleItem(item.id)"
+      v-for="item in listData"
+      :key="item._id"
+      @click="handleItem(item._id)"
     >
       <p class="date">{{ item.createTime }}</p>
       <div class="description">
@@ -38,7 +38,7 @@ export default {
       listData: []
     };
   },
-  created() {
+  mounted() {
     this.handle();
   },
   methods: {
@@ -63,6 +63,7 @@ export default {
 <style lang="less" scoped>
 .list {
   font-size: 13px;
+  min-width: 400px;
   .list_item {
     height: 130px;
     border: 1px dashed #ebedf0;
