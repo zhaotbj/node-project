@@ -40,6 +40,20 @@ const actions = {
   // 发布
   async saveArtic({commit}, params) {
     return await service.post("/article/create", params);
+  },
+  // 获取分类
+  async getCategory({commit}, params) {
+    return await service.get("/home/getCategory");
+  },
+  // 上传图片
+  async uploadImage({commit}, params) {
+    return await service.post("/home/upload", params,
+    {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data'
+      }
+    })
   }
 };
 export default actions;

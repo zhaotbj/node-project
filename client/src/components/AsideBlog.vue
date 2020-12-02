@@ -12,21 +12,38 @@
    
     
     <div class="blog_tag">
-      <el-tag size="mini" type="success">Vue</el-tag>
-      <el-tag size="mini" type="info">vue-router</el-tag>
+      <el-tag class="tag" size="mini" type="success" v-for="item in category" :key="item._id">{{item.name}}</el-tag>
+      <!-- <el-tag size="mini" type="info">vue-router</el-tag>
       <el-tag size="mini" type="warning">Vuex</el-tag>
       <el-tag size="mini" type="danger">Node</el-tag>
       <el-tag size="mini" type="success">React</el-tag>
       <el-tag size="mini" type="info">ES6</el-tag>
-      <el-tag size="mini" type="warning">H5C3</el-tag>
+      <el-tag size="mini" type="warning">H5C3</el-tag> -->
       <!-- <el-tag type="danger">标签五</el-tag> -->
     </div>
   </div>
 </template>
 <script>
+import {mapActions} from 'vuex';
 export default {
   name:'Aside',
+  data(){
+    return {
+      category: []
+      }
+  },
+  mounted(){
+     this.getCategory().then(res=>{
+          if(res.flag){
+            this.category = res.data;
+          }
+        })
+  },
   methods: {
+     ...mapActions({
+      getCategory: 'getCategory'
+    }),
+
     btn() {
     this.$nextTick(()=> {
 
@@ -78,6 +95,11 @@ export default {
   }
   .blog_tag{
     margin: 50% 0;
+    .tag{
+      margin-right: 5px;
+      margin-top: 5px;
+      cursor: pointer;
+    }
   }
 }
 </style>

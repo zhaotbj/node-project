@@ -6,7 +6,9 @@ const views = require("koa-views");
 const staticFiles = require('koa-static');
 const render = require('koa-ejs');
 // const miSend = require('./mi-send')
-const miLog = require('./mi-log')
+const miLog = require('./mi-log');
+const koaBody = require('koa-body'); //解析上传文件的插件
+
 module.exports = (app) => {
   app.use(miLog({
     env: app.env, // koa 提供的环境变量
@@ -16,17 +18,27 @@ module.exports = (app) => {
     serverIp: ip.address()
   }))
 
- app.use(staticFiles(path.resolve(__dirname, "../dist")))
+ app.use(staticFiles(path.resolve(__dirname, "../client/dist")));
+ app.use(staticFiles(path.resolve(__dirname, "../upload")));
 //  app.use(views(path.join(__dirname, "../dist"), {
 //     extension: "html",
 //   }))
-  render(app, {
-    root: path.join(__dirname, '../dist'),
-    layout: 'index',
-    viewExt: 'html',
-    cache: false,
-    debug: true
-  });
-  app.use(bodyParser())
+  // render(app, {
+  //   root: path.join(__dirname, '../client/dist'),
+  //   layout: 'index',
+  //   viewExt: 'html',
+  //   cache: false,
+  //   debug: true
+  // });
+  
   // app.use(miSend())
+
+  // 上传文件
+  app.use(koaBody({
+     multipart: true,
+     // formidable: {
+     //     maxFileSize: 2000 * 1024 * 1024    // 设置上传文件大小最大限制，默认2M
+     // }
+ }))
+ app.use(bodyParser())
 }

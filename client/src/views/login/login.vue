@@ -1,7 +1,12 @@
 <template>
   <div>
     <el-dialog title="登录" :visible.sync="dialogVisible" width="30%">
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
+      <el-form
+        :model="ruleForm"
+        :rules="rules"
+        ref="ruleForm"
+        label-width="100px"
+      >
         <el-form-item label="用户名" prop="userName">
           <el-input v-model="ruleForm.userName"></el-input>
         </el-form-item>
@@ -11,7 +16,9 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submitForm('ruleForm')">确 定</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm')"
+          >确 定</el-button
+        >
       </span>
     </el-dialog>
   </div>
@@ -36,26 +43,33 @@ export default {
       },
     };
   },
+  destroyed() {
+    this.dialogVisible = true;
+  },
   methods: {
     ...mapActions({
-      userLogin:"userLogin"
+      userLogin: "userLogin"
     }),
     submitForm(formName) {
-      this.$refs[formName].validate( async(valid) => {
+      this.$refs[formName].validate(async (valid) => {
         if (valid) {
           // alert('submit!');
-          const  res = await this.userLogin(this.ruleForm);
+          const res = await this.userLogin(this.ruleForm);
           console.log(res);
-          if(res.flag) {
-              this.$message({
-                  message: '登录成功！',
-                  type: 'success',
-                  duration: 2000
-                });
-                this.dialogVisible = false
-            } else {
-              this.$message.error('登录失败!');
+          if (res.flag) {
+            if(!res.message.isMatch) {
+              this.$message.error('账户或密码错误');
+              return;
             }
+            this.$message({
+              message: '登录成功！',
+              type: 'success',
+              duration: 2000
+            });
+            this.dialogVisible = false
+          } else {
+            this.$message.error('账户或密码错误!');
+          }
         } else {
           console.log("error submit!!");
           return false;

@@ -1,33 +1,83 @@
 const Router = require("koa-router")
 let router = new Router()
+const ip = require('ip');
+const fs = require('fs');
+const path = require("path");
+const mongoose = require('mongoose')
+// 上传图片
+router.post("/upload", async (ctx) => {
+	console.log(ctx.request.files.file, 'upload---');
+	try {
+		let { file } = ctx.request.files;
+		if (!file) {
+			ctx.body = { flag: false, message: "上传失败 file能为空" };
+		}
+		// 上传单个文件
 
-const fs = require('fs')
-router.get("/", async (ctx) => {
-	try{
-		const result= await readFile_promise("./data_json/home.json");
-		ctx.body={
-			code:200,
-			data:JSON.parse(result)
-		}
-	}catch(e){
-		//TODO handle the exception
-		ctx.body={
-			code:500,
-			data:''
-		}
+		// 创建可读流
+		const reader = fs.createReadStream(file.path);
+		let filePath = path.join(__dirname, '../upload') + `/${file.name}`;
+		// 创建可写流
+		const upStream = fs.createWriteStream(filePath);
+		// 可读流通过管道写入可写流
+		reader.pipe(upStream);
+		ctx.body = { flag: true, filePath: `/${file.name}`, fileName: file.name, message: '上传成功！' }
+	} catch (e) {
+		ctx.body = { flag: false, message: "保存失败" + e };
 	}
-	
-	
+
+
 })
 
-function readFile_promise(path){
-	return new Promise((resolve, reject)=>{
-				fs.readFile(path, 'utf8', (err, data) => {
-					if(data){
-						resolve(data);
-					} else {
-						reject(err)
-					}
+
+// 分类写固定
+router.get("/addCategory", async(ctx) =>{
+	let obj = {
+		1: 'Vue',
+		2: "React",
+		3:'Node.js',
+		4: '小程序',
+		5: 'Mysql',
+		6: 'Linux',
+		7: '随笔',
+		8: '未分类'
+	}
+	try {
+		let Category = mongoose.model("Category");
+		
+		let promiseArr = [];
+		for(var key in obj) {
+			 let promise = new Category({
+				name: obj[key],
+				value: key,
+				create_time: Date.now().toString()
+		   }).save();
+		   promiseArr.push(promise);
+		}
+	   let result = await  Promise.all(promiseArr).then(res=>{
+			return res;
+		})
+		ctx.body = {flag: true, data: result}
+		
+	} catch (error) {
+		ctx.body = { flag: false, message: "失败" + error };
+	}
+})
+
+router.get('/getCategory', async(ctx) =>{
+	let Category = mongoose.model("Category");
+	const reuslt =await Category.find({});
+	ctx.body = {flag: true, data: reuslt};
+
+})
+function readFile_promise(path) {
+	return new Promise((resolve, reject) => {
+		fs.readFile(path, 'utf8', (err, data) => {
+			if (data) {
+				resolve(data);
+			} else {
+				reject(err)
+			}
 		})
 	})
 }

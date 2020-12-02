@@ -29,11 +29,6 @@ const router = new Router({
           component: () => import("../views/blog/about.vue")
         },
         {
-          path:"/_id/:id",
-          name:"detail",
-          component: () => import("../views/blog/detail.vue")
-        },
-        {
           path:"/login",
           name:"login",
           component: () => import("../views/login/login.vue")
@@ -49,6 +44,11 @@ const router = new Router({
       path:"/write",
       name:"write",
       component: () => import("../views/blog/write.vue")
+    },
+    {
+      path:"/_id/:id",
+      name:"detail",
+      component: () => import("../views/blog/detail.vue")
     }
   ]
 });

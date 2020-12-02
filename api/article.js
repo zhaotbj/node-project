@@ -5,17 +5,14 @@ const mongoose = require('mongoose')
 
 // 读取所有文章
 router.get("/getAllList", async (ctx) => {
-  console.log('----getAllList------')
   try {
     const Article = mongoose.model('Article');
-    // const User = mongoose.model("User")
-    var result = await Article.find().sort({"id": -1}).exec();
-    // var userResult = await User.find().exec();
-    console.log("result",result)
+    
+    var result = await Article.find().sort({"_id": -1}).exec();
 
     ctx.body =  { flag: true, message: "操作成功", data: result };
   } catch (error) {
-    ctx.body =  { flag: false, message: "操作失败", data: result };
+    ctx.body =  { flag: false, message: "操作失败" + error, };
   }
 })
 
@@ -40,7 +37,7 @@ router.get("/getContentById", async (ctx) => {
     let {id} = ctx.request.query
     // const ArticleContent = mongoose.model('ArticleContent');
     const Article = mongoose.model('Article');
-    let resultArticle =await Article.findOne({id:id}).exec();
+    let resultArticle =await Article.findOne({_id:id}).exec();
     // let result = await ArticleContent.findOne(id).exec();
     
     // let  {readNumber,thumbUpNumber,commentNumber}=resultArticle
@@ -59,12 +56,14 @@ router.get("/getContentById", async (ctx) => {
 router.post("/create", async (ctx) => {
   console.log(ctx.request.body, '添加参数');
   try {
-    let { userId, content, title, image, summary, readNumber, commentNumber, thumbUpNumber, createTime } = ctx.request.body;
+    let { userId, userName, content, title,category, readNumber, commentNumber, thumbUpNumber, createTime } = ctx.request.body;
+    let summary = content.substring(0, 50);
     let obj = {
       userId: userId,
+      userName:userName,
       content: content,
       title: title,
-      image: image,
+      category: category,
       summary: summary, //文章简介
       readNumber: readNumber || 0, // 章阅读量
       commentNumber: commentNumber || 0, // 文章评论数
@@ -72,6 +71,7 @@ router.post("/create", async (ctx) => {
       createTime: createTime || new Date().toLocaleString(), //  创建时间
       modifiedTime: '', //修改时间
     }
+
     console.log(obj, '参数')
     // 添加文章内容
     const Article = mongoose.model('Article');

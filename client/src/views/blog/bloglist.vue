@@ -9,15 +9,18 @@
       <!-- <p class="date">{{ item.createTime }}</p> -->
       <div class="description">
         <h2 class="item_title">{{ item.title }}</h2>
-        <p class="desc">我是内容描述描述描述，我是内容描述描述描述，我是内容描述描述描述，我是内容描述描述描述</p>
       </div>
       <div class="summary">
-        <p>{{ item.summary }}</p>
+        <p v-html="item.summary"></p>
       </div>
       <div class="list-item-action">
         <p>
           <i class="el-icon-date"></i>
           发布时间： @ {{ item.createTime }}
+        </p>
+         <p>
+          
+          分类：  {{ categoryobj[item.category] || '未分类'}}
         </p>
         <p>
           <span class="el-icon-chat-dot-square"></span>
@@ -29,7 +32,7 @@
         </p>
         <p>
           
-          作者：{{ 'admin' }}
+          作者：{{ item.userName }}
         </p>
       </div>
     </li>
@@ -40,7 +43,8 @@ import {mapActions} from 'vuex';
 export default {
   data() {
     return {
-      listData: []
+      listData: [],
+      categoryobj: []
     };
   },
   mounted() {
@@ -48,12 +52,23 @@ export default {
   },
   methods: {
     ...mapActions({
-      getHomeList:"getHomeList"
+      getHomeList:"getHomeList",
+      getCategory: 'getCategory',
     }),
     async handle() {
       const res = await this.getHomeList();
       if (res.flag) {
           this.listData = res.data;
+          
+          this.getCategory().then(res=>{
+          if(res.flag){
+            let obj = {};
+            res.data.map(v=>{
+              obj[v.value] = v.name;
+            })
+            this.categoryobj = obj;
+          }
+        })
         }
     },
     handleItem(id) {

@@ -15,7 +15,6 @@
     "less": "^3.12.2",
     "less-loader": "^7.0.2",
     "mavon-editor": "^2.9.0",
-    "vant": "^2.2.3",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
     "vue2-editor": "^2.10.2",

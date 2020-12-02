@@ -44,11 +44,8 @@ app.use(cors({
 //     // 加载路由中间件
 // app.use(router.routes())
 // app.use(router.allowedMethods())
-
-
-middleware(app)
-router(app)
-;
+middleware(app);
+router(app);
 
 
 (async() => {
@@ -57,6 +54,6 @@ router(app)
 })()
 
 
-app.listen(3002, () => {
-    console.log(`starting in http://${ip.address()}:3002`)
+app.listen(3000, () => {
+    console.log(`starting in http://${ip.address()}:3000`)
 })

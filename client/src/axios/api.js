@@ -1,8 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
 const service = axios.create({
-  // baseURL: 'http://192.168.1.59:3002/',
-  baseURL: 'http://118.190.210.157:3002/',
+  // baseURL: 'http://192.168.1.59:3000/',
+  baseURL: 'http://39.100.82.50:3000/',
   timeout: 1000,
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded'
@@ -19,9 +19,12 @@ service.interceptors.request.use(
     // 码
     // 而后我们可以在响应拦截器中，根据状态码进行一些统一的操作。
     // const token = store.state.token;
-    console.log("config",config)
+    // console.log("config",config)
+    const contentType = config.headers["Content-Type"];
     if(config.method === 'post') {
-      config.data = qs.stringify(config.data);
+      if (!contentType.includes("multipart")) {
+        config.data = qs.stringify(config.data);
+      }
     } else {
       config.data = JSON.stringify(config.data);
     }

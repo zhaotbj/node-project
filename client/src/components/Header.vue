@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="header_box">
   <el-row>
           <el-col :span="12">
             <div class="">
@@ -14,8 +14,8 @@
               <el-col :span="5"><div class="header_title"><router-link :class="{bg_color: comName==='list'}" to="/">首页</router-link></div></el-col>
               <el-col :span="4"><div class="header_title"><router-link :class="{bg_color: comName==='archives'}" to="/archives">归档</router-link></div></el-col>
               <el-col :span="4"><div class="header_title"><router-link :class="{bg_color: comName==='about'}" to="/about">关于</router-link></div></el-col>
-              <el-col :span="2"><div class="header_title"><router-link :class="{bg_color: comName==='write'}" to="/write"><span class="register">写文章</span></router-link></div></el-col> 
-              <el-col :span="2"><div class="header_title"><router-link :class="{bg_color: comName==='login'}" to="login"><span class="login">登录</span></router-link></div></el-col>
+              <el-col :span="2"><div class="header_title" v-if="iswrite"><router-link :class="{bg_color: comName==='write'}" to="/write"><span class="register">写文章</span></router-link></div></el-col> 
+              <el-col :span="2"><div class="header_title"><router-link :class="{bg_color: comName==='login'}" to="/login"><span class="login">登录</span></router-link></div></el-col>
               <el-col :span="2"><div class="header_title"><router-link :class="{bg_color: comName==='register'}" to="/register"><span class="register">注册</span></router-link></div></el-col> 
               <el-col :span="2"><div class="header_title"> <el-avatar class="avatar" size="medium"  :src="userInfo.avatar">{{userInfo.userName}}</el-avatar>
               </div></el-col> 
@@ -32,7 +32,8 @@ export default {
 
   data () {
     return {
-      input: ''
+      input: '',
+      iswrite: false
     }
   },
   computed: {
@@ -43,14 +44,21 @@ export default {
       return this.$route.name
     }
   },
-  watch: {},
-  methods: {}
+  mounted(){
+    let userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+      if(userInfo &&userInfo.userId){
+       this.iswrite = true;
+      }
+  }
  
 }
 </script>
 
 <style lang="less" scoped>
-
+.header_box {
+  width: 1300px;
+  margin: 0 auto;
+}
 /deep/.el-aside {
   background-color: #fff;
   text-align: center;

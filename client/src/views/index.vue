@@ -10,7 +10,7 @@
         </el-aside>
         <el-container>
           <el-main><router-view /></el-main>
-          <el-footer>Footer</el-footer>
+          <!-- <el-footer>Footer</el-footer> -->
         </el-container>
       </el-container>
     </el-container>
@@ -37,9 +37,7 @@ export default {
 
 <style lang="less" scoped>
 @import url("@/assets/css/media.less");
-// .max_header {
-//   margin-top: 30px;
-// }
+
 /deep/.el-header,
 /deep/.el-footer {
   padding: 5px 10px;

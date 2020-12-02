@@ -75,7 +75,7 @@ export default {
           // alert('submit!');
           this.ruleForm.avatar = this.imageUrl;
           const res = await this.registerReq(this.ruleForm);
-          if(res.flag) {
+          if(res&&res.flag) {
                this.$message({
                   message: '注册成功！',
                   type: 'success',

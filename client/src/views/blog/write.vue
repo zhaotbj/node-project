@@ -14,7 +14,6 @@
     <!-- <vue-editor @imageAdded="handleImageAdded" v-model="htmlForEditor"></vue-editor> -->
     <div class="markdown-body">
       <mavon-editor
-    
         :toolbars="toolbars"
         @imgAdd="handleEditorImgAdd"
         @imgDel="handleEditorImgDel"
@@ -24,7 +23,11 @@
         ref="md"
       />
     </div>
-    
+    <el-dialog title="登录" :visible.sync="categoryDialog" width="30%">
+      <el-radio-group v-model="category">
+        <el-radio :label="item.value" v-for="item in categoryList" :key="item._id">{{item.name}}</el-radio>
+      </el-radio-group>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -35,7 +38,6 @@ export default {
   components: {
     VueEditor
   },
-
   data() {
     return {
       title: '',
@@ -44,6 +46,9 @@ export default {
         blogMdContent:"",
         blogContent:""
       },
+      category: '', //分类
+      categoryDialog: false,
+      categoryList: [],
       toolbars: {
         bold: true, // 粗体
         italic: true, // 斜体
@@ -83,7 +88,9 @@ export default {
   },
   methods: {
     ...mapActions({
-      saveArtic: 'saveArtic'
+      saveArtic: 'saveArtic',
+      getCategory: 'getCategory',
+      uploadImage: 'uploadImage'
     }),
 
     //监听markdown变化
@@ -97,18 +104,31 @@ export default {
     handleEditorImgAdd(pos, $file) {
       var formdata = new FormData();
       formdata.append('file', $file);
-      this.$axios
-        .post("http://localhost:8000/blogs/image/upload/", formdata)
-        .then(res => {
-          var url = res.data.data;
-          this.$refs.md.$img2Url(pos, url);  //这里就是引用ref = md 然后调用$img2Url方法即可替换地址
-        });
+      this.uploadImage(formdata).then(res=>{
+        this.$refs.md.$img2Url(pos, window.location.host + res.filePath)
+      })
+      // this.$axios
+      //   .post("http://localhost:8000/blogs/image/upload/", formdata)
+      //   .then(res => {
+      //     var url = res.data.data;
+      //     this.$refs.md.$img2Url(pos, url);  //这里就是引用ref = md 然后调用$img2Url方法即可替换地址
+      //   });
     },
     handleEditorImgDel() {
       console.log('handleEditorImgDel');    //我这里没做什么操作，后续我要写上接口，从七牛云CDN删除相应的图片
     },
     subm() {
-      this.handleImageAdded(this.htmlForEditor)
+      if(!this.category) {
+        // 选分类
+        this.categoryDialog = true;
+        this.getCategory().then(res=>{
+          if(res.flag){
+            this.categoryList = res.data;
+          }
+        })
+        return
+      }
+      this.handleImageAdded(this.blogInfo.blogContent)
     },
     //  Editor, cursorLocation, resetUploader
     handleImageAdded: async function (file) {
@@ -127,16 +147,24 @@ export default {
         });
         return
       }
+    let userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+      if(!userInfo ||!userInfo.userId){
+        this.$message({
+          message: '请先登录',
+          type: 'warning',
+          duration: 2000
+        });
+        return
+      }
 
       let params = {
-        userId: Date.now().toString(),
-        'title': this.title,
+        userId: userInfo.userId,
+        userName:userInfo.userName,
+        title: this.title,
         content: file,
-        image: "",
-        summary: "",
-        type: "",
-        readNumber: ""
+        category: this.category //分类
       }
+      
       try {
         const result = await this.saveArtic(params);
         if (result.flag) {
