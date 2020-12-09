@@ -161,7 +161,6 @@ export default {
 <style lang="less" >
 .detail {
   background-color: #f2f2f2;
-  height: 100%;
   width: 100%;
   /deep/.el-header,
 /deep/.el-footer {
