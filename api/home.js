@@ -81,9 +81,10 @@ router.get("/archives", async(ctx) =>{
 	try {
 		const list = await Article.find();
 	let timearr = [];
+	console.log('list',list)
 	list.map(v =>{
 		let obj = {};
-		obj.time = new Date(v.createTime).getTime();
+		obj.time = Number(v.createTime);
 		timearr.push(obj);
 	})
 	let resultData = formatData(timearr);
@@ -92,7 +93,7 @@ router.get("/archives", async(ctx) =>{
 		resultData[i].id = i;
 		for(var j=0; j<resultData[i].data.length; j++) {
 			let current = list.filter(v=>{
-				if(new Date(v.createTime).getTime() == resultData[i].data[j]) {
+				if(v.createTime == resultData[i].data[j]) {
 					return v
 				}
 			})

@@ -18,9 +18,11 @@ function formateTime(value) {
 }
 // 归档时间格式 按月分
 function formatData(data){
+	
 	var arr = [];
 	data.forEach(function(item, i){
 		var tmpDate = new Date(item.time);
+		
 		var month = tmpDate.getMonth() + 1;
 		var year = tmpDate.getFullYear();
 		var tmpMonth = tmpDate.getMonth() + 1;
