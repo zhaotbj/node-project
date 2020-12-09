@@ -6,10 +6,15 @@ const mongoose = require('mongoose')
 // 读取所有文章
 router.get("/getAllList", async (ctx) => {
   try {
+    console.log('getAllList', ctx.request.query);
+    let {id} = ctx.request.query;
     const Article = mongoose.model('Article');
-    
-    var result = await Article.find().sort({"_id": -1}).exec();
-
+      result = [];
+    if(id){
+     result = await Article.find({"category": Number(id)}).sort({"_id": -1}).exec();
+    } else {
+    result = await Article.find().sort({"_id": -1}).exec();
+    }
     ctx.body =  { flag: true, message: "操作成功", data: result };
   } catch (error) {
     ctx.body =  { flag: false, message: "操作失败" + error, };
@@ -37,15 +42,15 @@ router.get("/getContentById", async (ctx) => {
     let {id} = ctx.request.query
     // const ArticleContent = mongoose.model('ArticleContent');
     const Article = mongoose.model('Article');
-    let resultArticle =await Article.findOne({_id:id}).exec();
-    // let result = await ArticleContent.findOne(id).exec();
-    
-    // let  {readNumber,thumbUpNumber,commentNumber}=resultArticle
-    // let data = {
-      // ...JSON.parse(JSON.stringify(result)),
-    //   "readNumber":readNumber,"thumbUpNumber":thumbUpNumber,"commentNumber":commentNumber
-    // }
-    ctx.body =  { flag: true, message: "操作成功", data: resultArticle };
+    // 
+    let resultArticle = await Article.findOne({_id:id}).exec();
+    // thumbUpNumber
+    let num = resultArticle.readNumber;
+    num +=1;
+    console.log('readNumber::',resultArticle.readNumber,'num::',num,resultArticle.id);
+    let update = await Article.update({id: resultArticle.id},{$set:{readNumber: num}});
+    let reuslt = await Article.findOne({_id:id}).exec();
+    ctx.body =  { flag: true, message: "操作成功", data: reuslt };
   } catch (error) {
     ctx.body = {flag: false, message: "操作失败",  data: error };
   }
@@ -143,5 +148,69 @@ router.post("/update", async (ctx) => {
 
 })
 
+
+// 点赞
+router.post("/zhan", async(ctx) => {
+  console.log(ctx.request.body, 'zhan');
+  try {
+    let {id} = ctx.request.body;
+    if(id){
+      const Article = mongoose.model('Article');
+    let resultArticle = await Article.findOne({id:id}).exec();
+    let num = resultArticle.commentNumber;
+     num+=1;
+      let update = await Article.update({id: resultArticle.id},{$set:{commentNumber: num}});
+      ctx.body = { flag: true, message: "操作成功", data: update };
+    }
+    
+  } catch (error) {
+    ctx.body = { flag: false, message: "操作失败", data: '' };
+  }
+})
+
+// 评论
+router.post("/comment", async(ctx)=>{
+  console.log(ctx.request.body, 'comment');
+  try {
+    const {articleId,name,email,url,desc} = ctx.request.body;
+    const Comment = mongoose.model("Comment");
+    let comment = [], commentItem =[], result=[];
+    const list = await Comment.findOne({articleId: articleId});
+    
+    comment.push({
+      name:name,
+      email:email,
+      url:url,
+      desc:desc,
+      time: new Date().toLocaleString(),
+      createTime:Date.now()
+    });
+    if(list){
+      let newarr = list.comment.concat(comment);
+      result= await Comment.update({ "articleId": articleId }, {"$set":{"comment": newarr }})
+    } else {
+       commentItem = new Comment({articleId: articleId, comment: comment});
+       result = await  commentItem.save();
+    }
+    ctx.body = {flag: true, message:"成功", data: result}
+  } catch (error) {
+    ctx.body = {flag: false, message:"错误"}
+  }
+})
+// 查所有评论 根据文章id查
+router.get('/getCommentByArticleId', async(ctx)=>{
+  try {
+    console.log(ctx.request.query, '参数')
+    let {articleId} = ctx.request.query;
+    if(!articleId) {
+      ctx.body = {flag: false, message:"错误"}
+    }
+    const Comment = mongoose.model("Comment");
+      const result = await Comment.find({articleId: articleId});
+      ctx.body = {flag: true, data: result}
+  } catch (error) {
+    ctx.body = {flag: false, message:"错误"}
+  }
+})
 
 module.exports = router;

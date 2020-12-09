@@ -29,7 +29,7 @@ const actions = {
 
   // 首页
   async getHomeList({ commit }, params) {
-    return await service.get('/article/getAllList');
+    return await service.get('/article/getAllList?id='+params);
   },
 
   // 获取文章详情
@@ -54,6 +54,22 @@ const actions = {
         'Content-Type': 'multipart/form-data'
       }
     })
-  }
+  },
+  // 获取归档
+  async getArchives({commit}, params) {
+    return await service.get("/home/archives", params);
+  },
+  // 点赞
+  async updateZhan({commit}, params) {
+    return await service.post("/article/zhan", params);
+  },
+  // 评论
+  async updateComment({commit}, params) {
+    return await service.post("/article/comment", params);
+  },
+  // 查评论
+  async getCommentByArticleId({commit}, params) {
+    return await service.get("/article/getCommentByArticleId?articleId="+params);
+  },
 };
 export default actions;

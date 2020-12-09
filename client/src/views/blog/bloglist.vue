@@ -1,4 +1,13 @@
 <template>
+<div>
+  <div class="category">
+    <h1>分类：</h1>
+    <a class="category_item" href="javascript:;" v-for="(v, i) in category" :key="v._id"
+    :class="{'active': activeId== i}"
+    @click="handleCategory(v,i)">{{v.name}}</a>
+    
+  </div>
+
   <div class="list">
     <li
       class="list_item"
@@ -28,7 +37,7 @@
         </p>
         <p>
           <span class="el-icon-view"></span>
-          {{ item.readNumber }}
+          {{ item.thumbUpNumber }}
         </p>
         <p>
           
@@ -37,6 +46,7 @@
       </div>
     </li>
   </div>
+</div>
 </template>
 <script>
 import {mapActions} from 'vuex';
@@ -44,24 +54,40 @@ export default {
   data() {
     return {
       listData: [],
-      categoryobj: []
+      categoryobj: [],
+      category:[],
+      activeId:0
     };
   },
   mounted() {
-    this.handle();
+    this.getCateData();
+    this.getBlogList();
   },
   methods: {
     ...mapActions({
       getHomeList:"getHomeList",
       getCategory: 'getCategory',
     }),
-    async handle() {
-      const res = await this.getHomeList();
+    handleCategory(row,i){
+      console.log(row);
+      this.activeId = i;
+      this.getBlogList(row.value);
+    },
+    async getBlogList(params) {
+      const res = await this.getHomeList(params? params: '');
       if (res.flag) {
           this.listData = res.data;
-          
-          this.getCategory().then(res=>{
+        }
+    },
+    getCateData(){
+      this.getCategory().then(res=>{
           if(res.flag){
+             res.data.unshift({
+                  name: "全部",
+                  value: '',
+                  _id: "5fc74d7257f01ca91813f2900",
+              })
+            this.category = res.data;
             let obj = {};
             res.data.map(v=>{
               obj[v.value] = v.name;
@@ -69,7 +95,6 @@ export default {
             this.categoryobj = obj;
           }
         })
-        }
     },
     handleItem(id) {
       console.log(id)
@@ -81,6 +106,26 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.category {
+  display: flex;
+  padding-bottom: 5px;
+  h1{
+    color: #333;
+    font-size: 18px;
+    padding: 3px;
+  }
+  .category_item {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    padding: 3px 10px;
+  }
+  .active {
+    color: #fff;
+    background-color: #333;
+  }
+}
+
 .list {
   font-size: 13px;
   min-width: 400px;

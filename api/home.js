@@ -3,7 +3,9 @@ let router = new Router()
 const ip = require('ip');
 const fs = require('fs');
 const path = require("path");
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const {formatData} = require("../common/common");
+
 // 上传图片
 router.post("/upload", async (ctx) => {
 	console.log(ctx.request.files.file, 'upload---');
@@ -21,7 +23,7 @@ router.post("/upload", async (ctx) => {
 		const upStream = fs.createWriteStream(filePath);
 		// 可读流通过管道写入可写流
 		reader.pipe(upStream);
-		ctx.body = { flag: true, filePath: `/${file.name}`, fileName: file.name, message: '上传成功！' }
+		ctx.body = { flag: true, filePath: `http://${ip.address()}:3000/${file.name}`, fileName: file.name, message: '上传成功！' }
 	} catch (e) {
 		ctx.body = { flag: false, message: "保存失败" + e };
 	}
@@ -70,17 +72,45 @@ router.get('/getCategory', async(ctx) =>{
 	ctx.body = {flag: true, data: reuslt};
 
 })
-function readFile_promise(path) {
-	return new Promise((resolve, reject) => {
-		fs.readFile(path, 'utf8', (err, data) => {
-			if (data) {
-				resolve(data);
-			} else {
-				reject(err)
-			}
-		})
+ 
+
+// 归档
+router.get("/archives", async(ctx) =>{
+	const Article = mongoose.model('Article');
+	try {
+		const list = await Article.find();
+	let timearr = [];
+	list.map(v =>{
+		let obj = {};
+		obj.time = new Date(v.createTime).getTime();
+		timearr.push(obj);
 	})
-}
+	let resultData = formatData(timearr);
+	for(var i = 0; i<resultData.length; i++) {
+		resultData[i].children = [];
+		resultData[i].id = i;
+		for(var j=0; j<resultData[i].data.length; j++) {
+			let current = list.filter(v=>{
+				if(new Date(v.createTime).getTime() == resultData[i].data[j]) {
+					return v
+				}
+			})
+			if(current.length>0){
+				let obj = {
+					title: current[0].title,
+					desc: current[0].userName+ ' 提交于 '+current[0].createTime,
+					id:  resultData[i].data[j]
+				}
+				resultData[i].children.push(obj);
+			}
+		}
+	}
+	ctx.body = {flag: true, data: resultData};
+	} catch (error) {
+		ctx.body = {flag: false, message:"归档失败了~~", data:[]}
+	}
+})
+
 
 
 

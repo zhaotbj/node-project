@@ -105,7 +105,7 @@ export default {
       var formdata = new FormData();
       formdata.append('file', $file);
       this.uploadImage(formdata).then(res=>{
-        this.$refs.md.$img2Url(pos, window.location.host + res.filePath)
+        this.$refs.md.$img2Url(pos, res.filePath)
       })
       // this.$axios
       //   .post("http://localhost:8000/blogs/image/upload/", formdata)

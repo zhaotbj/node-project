@@ -22,11 +22,12 @@
         <el-form-item label="头像">
           <el-upload
             class="avatar-uploader"
-            action=""
+            :action="uploadApi"
             :show-file-list="false"
             :before-upload="beforeAvatarUpload"
+            :on-success="handleSuccess"
           >
-            <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+            <img v-if="ruleForm.avatar" :src="ruleForm.avatar" class="avatar" />
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-form-item>
@@ -42,10 +43,12 @@
 </template>
 
 <script>
-import { mapActions} from 'vuex'
+import { mapActions} from 'vuex';
+
 export default {
   data() {
     return {
+      uploadApi: '/home/upload',
       dialogVisible: true,
       ruleForm: {
         userName: "",
@@ -110,14 +113,28 @@ export default {
         // this.imageUrl  = window.URL.createObjectURL(file);
         // console.log(this.imageUrl,'---')
        //获取文件域中选中的图片
-                var reader = new FileReader(); //实例化文件读取对象
-                reader.readAsDataURL(file); //将文件读取为 DataURL,也就是base64编码
-                reader.onload = (ev)=> { //文件读取成功完成时触发
-                    var dataURL = ev.target.result; //获得文件读取成功后的DataURL,也就是base64编码
-                     this.imageUrl  = dataURL; //将DataURL码赋值给img标签
-                }
-        // return isJPG && isLt2M;
-        return false;
+        // var reader = new FileReader(); //实例化文件读取对象
+        // reader.readAsDataURL(file); //将文件读取为 DataURL,也就是base64编码
+        // reader.onload = (ev)=> { //文件读取成功完成时触发
+        //     var dataURL = ev.target.result; //获得文件读取成功后的DataURL,也就是base64编码
+        //      this.imageUrl  = dataURL; //将DataURL码赋值给img标签
+        // }
+        return isJPG && isLt2M;
+        // return false;
+      },
+      handleSuccess(response, file, fileList){
+        console.log(response, file, fileList);
+        if(response.flag){
+          this.ruleForm.avatar = response.filePath;
+          //获取文件域中选中的图片
+        // var reader = new FileReader(); //实例化文件读取对象
+        // reader.readAsDataURL(file); //将文件读取为 DataURL,也就是base64编码
+        // reader.onload = (ev)=> { //文件读取成功完成时触发
+        //     var dataURL = ev.target.result; //获得文件读取成功后的DataURL,也就是base64编码
+        //      this.imageUrl  = dataURL; //将DataURL码赋值给img标签
+        //   }
+        }
+        
       }
     }
 
