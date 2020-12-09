@@ -24,7 +24,7 @@ router.post("/upload", async (ctx) => {
 		const upStream = fs.createWriteStream(filePath);
 		// 可读流通过管道写入可写流
 		reader.pipe(upStream);
-		ctx.body = { flag: true, filePath: `http://${api}/${file.name}`, fileName: file.name, message: '上传成功！' }
+		ctx.body = { flag: true, filePath: `${api}/${file.name}`, fileName: file.name, message: '上传成功！' }
 	} catch (e) {
 		ctx.body = { flag: false, message: "保存失败" + e };
 	}
