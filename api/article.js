@@ -61,7 +61,7 @@ router.get("/getContentById", async (ctx) => {
 router.post("/create", async (ctx) => {
   console.log(ctx.request.body, '添加参数');
   try {
-    let { userId, userName, content, title,category, readNumber, commentNumber, thumbUpNumber, createTime } = ctx.request.body;
+    let { userId, userName, content, title,category, readNumber, commentNumber, thumbUpNumber } = ctx.request.body;
     let summary = content.substring(0, 50);
     let obj = {
       userId: userId,
@@ -73,7 +73,7 @@ router.post("/create", async (ctx) => {
       readNumber: readNumber || 0, // 章阅读量
       commentNumber: commentNumber || 0, // 文章评论数
       thumbUpNumber: thumbUpNumber || 0, // 文章点赞数
-      // createTime: date(), //  创建时间
+      time: date(), //  创建时间
       modifiedTime: '', //修改时间
     }
 
