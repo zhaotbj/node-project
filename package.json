@@ -31,6 +31,7 @@
     "koa-static": "^5.0.0",
     "koa-views": "^6.3.1",
     "koa2-cors": "^2.0.6",
+    "less-loader": "^7.1.0",
     "log4js": "^6.3.0",
     "mavon-editor": "^2.9.0",
     "mongolass": "^4.4.7",

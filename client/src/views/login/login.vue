@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog title="登录" :visible.sync="dialogVisible" width="30%">
+    <el-dialog  :destroy-on-close="true" title="登录" :visible.sync="dialogVisible" width="30%">
       <el-form
         :model="ruleForm"
         :rules="rules"
@@ -29,7 +29,7 @@ import { mapActions } from 'vuex';
 export default {
   data() {
     return {
-      dialogVisible: true,
+      dialogVisible: false,
       ruleForm: {
         userName: "",
         password: ""

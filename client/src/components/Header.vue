@@ -28,8 +28,7 @@
 <script>
 import { mapGetters} from 'vuex';
 export default {
-  name: 'BlogHeader',
-
+  // name: 'BlogHeader',
   data () {
     return {
       input: '',

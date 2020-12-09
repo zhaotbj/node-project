@@ -73,7 +73,7 @@ router.post("/create", async (ctx) => {
       readNumber: readNumber || 0, // 章阅读量
       commentNumber: commentNumber || 0, // 文章评论数
       thumbUpNumber: thumbUpNumber || 0, // 文章点赞数
-      createTime: createTime || new Date().toLocaleString(), //  创建时间
+      // createTime: date(), //  创建时间
       modifiedTime: '', //修改时间
     }
 

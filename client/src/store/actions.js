@@ -1,4 +1,4 @@
-import service from '../axios/api'
+import service from '../axios/api.js'
 const actions = {
   // 注册
   async userLogin({ commit }, params) {

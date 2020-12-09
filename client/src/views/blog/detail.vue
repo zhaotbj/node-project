@@ -220,7 +220,7 @@ export default {
   display: flex;
   justify-content: center;
   .content {
-    min-width: 750px;
+    max-width: 750px;
     background-color: #fff;
     min-height: 800px;
     // text-align: center;

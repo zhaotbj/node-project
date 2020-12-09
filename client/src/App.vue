@@ -5,11 +5,7 @@
 </template>
 
 <script>
-import BlogHeader from '@/components/Header';
 export default {
-  components:{
-    BlogHeader
-  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="register_box">
-    <el-dialog title="注册" :visible.sync="dialogVisible" width="30%">
+    <el-dialog :destroy-on-close="true" title="注册" :visible.sync="dialogVisible" width="30%">
       <el-form
         :model="ruleForm"
         :rules="rules"
@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       uploadApi: 'http://39.100.82.50:3000/home/upload',
-      dialogVisible: true,
+      dialogVisible: false,
       ruleForm: {
         userName: "",
         password: "",
