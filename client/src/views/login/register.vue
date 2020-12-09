@@ -48,7 +48,7 @@ import { mapActions} from 'vuex';
 export default {
   data() {
     return {
-      uploadApi: '/home/upload',
+      uploadApi: 'http://39.100.82.50:3000/home/upload',
       dialogVisible: true,
       ruleForm: {
         userName: "",

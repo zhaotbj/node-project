@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require("path");
 const mongoose = require('mongoose');
 const {formatData} = require("../common/common");
+const api = 'http://39.100.82.50:3000'
 
 // 上传图片
 router.post("/upload", async (ctx) => {
@@ -23,7 +24,7 @@ router.post("/upload", async (ctx) => {
 		const upStream = fs.createWriteStream(filePath);
 		// 可读流通过管道写入可写流
 		reader.pipe(upStream);
-		ctx.body = { flag: true, filePath: `http://${ip.address()}:3000/${file.name}`, fileName: file.name, message: '上传成功！' }
+		ctx.body = { flag: true, filePath: `http://${aip}/${file.name}`, fileName: file.name, message: '上传成功！' }
 	} catch (e) {
 		ctx.body = { flag: false, message: "保存失败" + e };
 	}
