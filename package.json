@@ -1,40 +1,49 @@
 {
-  "name": "koa-blog",
+  "name": "node-project",
   "version": "1.0.0",
-  "description": "```\r node app.js 或 npm run dev\r 默认是3000端口\r ```",
-  "main": "app.js",
+  "description": "",
+  "private": true,
+  "egg": {
+    "declarations": true
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "egg": "^2.15.1",
+    "egg-mongoose": "^3.3.1",
+    "egg-scripts": "^2.11.0",
+    "egg-view-ejs": "^2.0.1"
+  },
+  "devDependencies": {
+    "autod": "^3.0.1",
+    "autod-egg": "^1.1.0",
+    "egg-bin": "^4.11.0",
+    "egg-ci": "^1.11.0",
+    "egg-mock": "^3.21.0",
+    "eslint": "^5.13.0",
+    "eslint-config-egg": "^7.1.0"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
   "scripts": {
-    "dev": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "egg-scripts start --daemon --title=egg-server-node-project",
+    "stop": "egg-scripts stop --title=egg-server-node-project",
+    "dev": "egg-bin dev",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
+  },
+  "ci": {
+    "version": "10"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zhaotbj/node-blog.git"
+    "url": ""
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/zhaotbj/node-blog/issues"
-  },
-  "homepage": "https://github.com/zhaotbj/node-blog#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "config-lite": "^3.0.0",
-    "ejs": "^3.1.5",
-    "glob": "^7.1.5",
-    "ip": "^1.1.5",
-    "koa": "^2.11.0",
-    "koa-body": "^4.2.0",
-    "koa-bodyparser": "^4.2.1",
-    "koa-ejs": "^4.3.0",
-    "koa-router": "^8.0.6",
-    "koa-static": "^5.0.0",
-    "koa-views": "^6.3.1",
-    "koa2-cors": "^2.0.6",
-    "less-loader": "^7.1.0",
-    "log4js": "^6.3.0",
-    "mavon-editor": "^2.9.0",
-    "mongolass": "^4.4.7",
-    "mongoose": "^5.8.9"
-  }
+  "author": "975619483@qq.com",
+  "license": "MIT"
 }
