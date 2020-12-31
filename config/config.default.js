@@ -33,6 +33,13 @@ module.exports = appInfo => {
       enable: false,
     },
   };
+  config.cluster = {
+    listen: {
+      path: '',
+      port: 3000,
+      hostname: '0.0.0.0',
+    }
+  };
   exports.mongoose = {
     client: {
       // 有用户名和密码的数据库的连接方式
