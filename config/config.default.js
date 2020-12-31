@@ -17,14 +17,7 @@ module.exports = appInfo => {
       '.ejs': 'ejs',
     },
   }
-  config.mongoose = {
-    client: {
-      url: 'mongodb://127.0.0.1:27017/node_blog',  //你的数据库地址，不要端口,后面的admin是数据库名称
-      options: {
-        useNewUrlParser: true,
-      },
-    }
-  }
+
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1608189823534_3621';
 
@@ -40,11 +33,19 @@ module.exports = appInfo => {
       enable: false,
     },
   };
-  
+  exports.mongoose = {
+    client: {
+      // 有用户名和密码的数据库的连接方式
+      // url:'mongodb://admin:123456@localhost:27017/test'
+      url: 'mongodb://127.0.0.1/eggDemo',
+      options: {
+        useNewUrlParser: true,
+      },
+    },
+  };
 
   return {
     ...config,
     ...userConfig,
   };
 };
-

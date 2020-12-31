@@ -13,6 +13,7 @@ module.exports = app => {
 //   await connect(); // 执行连接数据库任务
 // })();
   router.get('/', controller.home.index);
+  router.get('/article', controller.article.addUser);
   router.get('/user', controller.user.index);
   router.post('/user/login', controller.user.login);
   // router.get('/home', controller.user.index);

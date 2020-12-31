@@ -11,10 +11,9 @@ module.exports = {
     enable: true,
     package: 'egg-view-ejs'
   },
-  
+  mongoose: {
+    enable: true,
+    package: 'egg-mongoose',
+  }
 };
 
-exports.mongoose = {
-  enable: true,
-  package: 'egg-mongoose',
-};
