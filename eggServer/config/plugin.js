@@ -6,7 +6,7 @@ module.exports = {
   // static: {
   //   enable: true,
   // }
-  
+
   ejs: {
     enable: true,
     package: 'egg-view-ejs'
@@ -16,8 +16,8 @@ module.exports = {
     package: 'egg-mongoose',
   },
   cors: {
-      enable: true,
-      package: 'egg-cors'
+    enable: true,
+    package: 'egg-cors',
   }
 };
 

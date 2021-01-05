@@ -17,11 +17,7 @@ module.exports = appInfo => {
       '.ejs': 'ejs',
     },
   }
-  config.multipart = {
-    mode: 'file',
-    fileSize: '50mb',
-    fileExtensions: [ '.png','.jpg' ], // 增加对 txt 扩展名的文件支持
-  }
+
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1608189823534_3621';
 
@@ -37,7 +33,10 @@ module.exports = appInfo => {
       enable: false,
     },
   };
-  
+  config.cors = {
+    origin: '*', // 匹配规则  域名+端口  *则为全匹配
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+  };
   config.cluster = {
     listen: {
       path: '',
@@ -45,17 +44,6 @@ module.exports = appInfo => {
       hostname: '0.0.0.0',
     }
   };
-  // 配置跨域
-  config.security = {
-    　　　　csrf: {
-    　　　　　　enable: false
-    　　　　},
-    　　　　domainWhiteList: [ '*' ]
-    　　};
-     config.cors = {
-        origin: '*',
-        allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
-    }
   exports.mongoose = {
     client: {
       // 有用户名和密码的数据库的连接方式
