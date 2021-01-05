@@ -20,7 +20,12 @@ module.exports = appInfo => {
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1608189823534_3621';
-
+  // 配置上传
+  config.multipart = {
+    fileSize: '50mb',
+    mode: 'file',
+    // fileExtensions: ['.xls', '.txt'], // 扩展几种上传的文件格式
+  };
   // add your middleware config here
   config.middleware = [];
 

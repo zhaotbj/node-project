@@ -13,14 +13,14 @@ class UserService extends Service {
       if (userName && password && gender) {
         const newUser = ctx.model.User(params);
         const result = await newUser.save()
-        return ctx.body = { flag: true, message: "注册成功", data: result };
+        return  { flag: true, message: "注册成功", data: result };
       } else {
-        return ctx.body = { flag: false, message: "注册失败", data: result };
+        return { flag: false, message: "注册失败", data: result };
       }
 
 
     } catch (e) {
-      return ctx.body = { flag: false, message: "注册失败", data: e };
+      return  { flag: false, message: "注册失败", data: e };
     }
   }
 

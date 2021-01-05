@@ -48,8 +48,8 @@ import { mapActions} from 'vuex';
 export default {
   data() {
     return {
-      uploadApi: 'http://39.100.82.50:3000/home/upload',
-      dialogVisible: false,
+      uploadApi: 'http://192.168.1.122:3000/home/upload',
+      dialogVisible: true,
       ruleForm: {
         userName: "",
         password: "",
@@ -66,6 +66,9 @@ export default {
       },
       imageUrl: null
     }
+  },
+  destroyed() {
+    this.dialogVisible = false;
   },
   methods: {
     ...mapActions({

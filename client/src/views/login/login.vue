@@ -29,7 +29,7 @@ import { mapActions } from 'vuex';
 export default {
   data() {
     return {
-      dialogVisible: false,
+      dialogVisible: true,
       ruleForm: {
         userName: "",
         password: ""
@@ -44,7 +44,7 @@ export default {
     };
   },
   destroyed() {
-    this.dialogVisible = true;
+    this.dialogVisible = false;
   },
   methods: {
     ...mapActions({
