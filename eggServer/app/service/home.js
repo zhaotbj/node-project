@@ -1,7 +1,7 @@
 const Service = require('egg').Service;
 const fs = require("fs");
 const path = require("path")
-const api = 'http://39.100.82.50:3000';
+const api = 'http://localhost:3000';
 const {formateTime,formatData}  = require('../util')
 class CategoryService extends Service {
     /**
