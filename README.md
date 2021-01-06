@@ -48,8 +48,9 @@ ejs: {
 # 启动项目
 - node项目
 ```
-node app.js 或 npm run dev
-默认是3002端口
+cd eggServer
+npm run dev 
+默认是3000端口
 ```
 - vue项目
 ```
