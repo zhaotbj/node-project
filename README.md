@@ -1,7 +1,36 @@
 # 博客介绍
-- egg配置文件上传
-- egg配置跨域
+### egg配置文件上传
+```javascript
+// config.default.js 配置文件加
+// 配置上传
+  config.multipart = {
+    fileSize: '50mb',
+    mode: 'file',
+    // fileExtensions: ['.xls', '.txt'], // 扩展几种上传的文件格式
+  };
+  this.ctx.request.files // 获取file文件
+```
+### egg配置跨域
+```javascript
+npm i egg-cors --save
 
+// plugin.js
+ejs: {
+    enable: true,
+    package: 'egg-view-ejs'
+  },
+
+// config.default.js
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+  config.cors = {
+    origin: '*', // 匹配规则  域名+端口  *则为全匹配
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+  };
+```
 前端展示 http://39.100.82.50:8111/
 后台管理 http://39.100.82.50:8080
 该项目使用前后端分离开发，前端展示、node做后台、以及后台管理。涉及的技术
