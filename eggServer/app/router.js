@@ -16,6 +16,7 @@ module.exports = app => {
   router.get('/home/addCategory', controller.home.addCategory) // 添加分类
   router.get('/home/getCategory', controller.home.getCategory) // 获取所有分类
   router.post('/home/upload', controller.home.upload) // 删除附件
+  router.get('/home/archives', controller.home.archives) // 归档
 
   
   router.get('/article/getAllList', controller.article.getAllList); // 获取文章列表

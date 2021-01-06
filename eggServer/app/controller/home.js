@@ -25,6 +25,10 @@ class HomeController extends Controller {
     }
     ctx.body = await ctx.service.home.upload(files[0]);
   }
+
+  async archives(){
+    this.ctx.body = await this.ctx.service.home.archives();
+  }
 }
 
 module.exports = HomeController;
