@@ -9,7 +9,7 @@ module.exports = {
 
   ejs: {
     enable: true,
-    package: 'egg-view-ejs'
+    package: 'egg-view-ejs',
   },
   mongoose: {
     enable: true,
@@ -18,6 +18,6 @@ module.exports = {
   cors: {
     enable: true,
     package: 'egg-cors',
-  }
+  },
 };
 

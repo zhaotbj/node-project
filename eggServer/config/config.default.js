@@ -16,7 +16,7 @@ module.exports = appInfo => {
     mapping: {
       '.ejs': 'ejs',
     },
-  }
+  };
 
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1608189823534_3621';
@@ -47,7 +47,7 @@ module.exports = appInfo => {
       path: '',
       port: 3000,
       hostname: '0.0.0.0',
-    }
+    },
   };
   exports.mongoose = {
     client: {

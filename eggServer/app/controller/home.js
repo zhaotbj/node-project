@@ -5,7 +5,7 @@ const Controller = require('egg').Controller;
 class HomeController extends Controller {
   async index() {
     const { ctx } = this;
-    ctx.body = 'index';
+    ctx.body = {flag:true, data:"hello world"};
   }
   async addCategory() {
     const { ctx } = this;
@@ -17,16 +17,16 @@ class HomeController extends Controller {
   }
   async upload() {
     const { ctx } = this;
-    
-    let files = ctx.request.files;
+
+    const files = ctx.request.files;
     console.log(files);
-    if(!files || files.length === 0){
-      return
+    if (!files || files.length === 0) {
+      return;
     }
     ctx.body = await ctx.service.home.upload(files[0]);
   }
 
-  async archives(){
+  async archives() {
     this.ctx.body = await this.ctx.service.home.archives();
   }
 }
