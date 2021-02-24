@@ -24,7 +24,7 @@
               <div class="footer_box">
                 <div class="read">阅读：{{article.readNumber}}</div>
               <div class="zhan" @click="handleZhan">点赞 
-                <span class="el-icon-star-off"></span>
+                <span class="el-icon-star-off" :class="{'active': active}"></span>
               </div>
               </div>
               <div class="comment">
@@ -83,7 +83,8 @@ export default {
         url:"",
         desc:""
       },
-      commentList: []
+      commentList: [],
+      active: false
     };
   },
   watch: {},
@@ -95,8 +96,10 @@ export default {
       getDetail: "getDetail",
       updateZhan:"updateZhan",
       updateComment:"updateComment",
-      getCommentByArticleId:"getCommentByArticleId"
+      getCommentByArticleId:"getCommentByArticleId",
+  
     }),
+    
     async getArticle() {
       let { id } = this.$route.params;
       const res = await this.getDetail(id);
@@ -114,13 +117,16 @@ export default {
         })
     },
     handleZhan(){
-      this.updateZhan({id: this.article.id}).then(res=>{
+      this.updateZhan({id: this.article._id}).then(res=>{
         if(res.flag){
+          this.active = true
            this.$message({
-            message: '保存成功！',
+            message: '点赞成功~',
             type: 'success',
             duration: 2000
           });
+
+          this.getArticle()
         }
       })
     },
@@ -199,6 +205,9 @@ export default {
   color: #969696;
   .zhan {
     cursor: pointer;
+    .active{
+      color: rgb(247, 186, 42)
+    }
   }
 }
 .comment {

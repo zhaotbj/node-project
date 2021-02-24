@@ -32,12 +32,12 @@
           <span class="cate">分类：</span>  {{ categoryobj[item.category] || '未分类'}}
         </p>
         <p class="commentNumber">
-          <span class="el-icon-chat-dot-square"></span>
+          <span class="el-icon-star-off"></span>
           {{ item.commentNumber }}
         </p>
         <p class="thumbUpNumber">
           <span class="el-icon-view"></span>
-          {{ item.thumbUpNumber }}
+          {{ item.readNumber }}
         </p>
         <p>
           
@@ -76,6 +76,7 @@ export default {
     ...mapActions({
       getHomeList:"getHomeList",
       getCategory: 'getCategory',
+      updateReadNum:"updateReadNum"
     }),
     handleCategory(row,i){
       console.log(row);
@@ -107,10 +108,13 @@ export default {
         })
     },
     handleItem(id) {
-      console.log(id)
+       this.addReadNum(id)
       this.$router.push({ path: `/_id/${id}` })
 
-    }
+    },
+    async addReadNum(id){
+      await this.updateReadNum(id)
+    },
   }
 };
 </script>
@@ -118,6 +122,5 @@ export default {
 <style lang="less" scoped>
 @import url("@/assets/css/bloglistPC.less");
 @import url("@/assets/css/bloglistPhone.less");
-
 
 </style>

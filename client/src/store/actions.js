@@ -71,5 +71,8 @@ const actions = {
   async getCommentByArticleId({commit}, params) {
     return await service.get("/article/getCommentByArticleId?articleId="+params);
   },
+  async updateReadNum({commit}, params) {
+    return await service.get("/article/updateReadNum?id="+params);
+  },
 };
 export default actions;

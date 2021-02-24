@@ -18,7 +18,7 @@ module.exports = (app) => {
     serverIp: ip.address()
   }))
 
- app.use(staticFiles(path.resolve(__dirname, "../client/dist")));
+ app.use(staticFiles(path.resolve(__dirname, "../views")));
  app.use(staticFiles(path.resolve(__dirname, "../upload")));
 //  app.use(views(path.join(__dirname, "../dist"), {
 //     extension: "html",

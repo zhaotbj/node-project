@@ -48,12 +48,12 @@ router.get("/getContentById", async (ctx) => {
     // const ArticleContent = mongoose.model('ArticleContent');
     const Article = mongoose.model('Article');
     // 
-    let resultArticle = await Article.findOne({_id:id}).exec();
+    // let resultArticle = await Article.findOne({_id:id}).exec();
     // thumbUpNumber
-    let num = resultArticle.readNumber;
-    num +=1;
-    console.log('readNumber::',resultArticle.readNumber,'num::',num,resultArticle.id);
-    let update = await Article.update({id: resultArticle.id},{$set:{readNumber: num}});
+    // let num = resultArticle.readNumber;
+    // num +=1;
+    // console.log('readNumber::',resultArticle.readNumber,'num::',num,resultArticle.id);
+    // let update = await Article.update({_id: id},{$set:{readNumber: num}});
     let reuslt = await Article.findOne({_id:id}).exec();
     ctx.body =  { flag: true, message: "操作成功", data: reuslt };
   } catch (error) {
@@ -78,7 +78,7 @@ router.post("/create", async (ctx) => {
       readNumber: readNumber || 0, // 章阅读量
       commentNumber: commentNumber || 0, // 文章评论数
       thumbUpNumber: thumbUpNumber || 0, // 文章点赞数
-      time: new Date().toLocaleString(), //  创建时间
+      time: Date.now(), //  创建时间
       modifiedTime: '', //修改时间
     }
 
@@ -153,7 +153,23 @@ router.post("/update", async (ctx) => {
 
 })
 
-
+router.get("/updateReadNum", async(ctx) => {
+  let {id} = ctx.request.query;
+  const Article = mongoose.model('Article');
+  // 
+  try {
+    let resultArticle = await Article.findOne({_id:id}).exec();
+  // thumbUpNumber
+      let num = resultArticle.readNumber;
+      num +=1;
+      console.log('readNumber::',resultArticle.readNumber,'num::',num,resultArticle.id);
+      let update = await Article.update({_id: id},{$set:{readNumber: num}});
+      ctx.body = { flag: true, message: "操作成功", data: update };
+ 
+  } catch (error) {
+    ctx.body = { flag: false, message: "操作失败", data: '' };
+  }
+})
 // 点赞
 router.post("/zhan", async(ctx) => {
   console.log(ctx.request.body, 'zhan');
@@ -161,10 +177,10 @@ router.post("/zhan", async(ctx) => {
     let {id} = ctx.request.body;
     if(id){
       const Article = mongoose.model('Article');
-    let resultArticle = await Article.findOne({id:id}).exec();
+    let resultArticle = await Article.findOne({_id:id}).exec();
     let num = resultArticle.commentNumber;
      num+=1;
-      let update = await Article.update({id: resultArticle.id},{$set:{commentNumber: num}});
+      let update = await Article.update({_id: id},{$set:{commentNumber: num}});
       ctx.body = { flag: true, message: "操作成功", data: update };
     }
     
