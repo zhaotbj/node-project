@@ -2,7 +2,8 @@
   <div class="detail">
     <el-container>
       <el-header class="max_header">
-        <BlogHeader />
+        <BlogHeaderPC  class="pc"/>
+       <BlogHeaderPhone  class="phone"/>
       </el-header>
         <div id="editor">
             <div class="content">
@@ -67,10 +68,11 @@
 </template>
 <script>
 import { mapActions } from 'vuex';
-import BlogHeader from '@/components/Header';
+import BlogHeaderPC from '@/components/Header';
 import 'github-markdown-css';
+import BlogHeaderPhone from "@/components/HeaderPhone";
 export default {
-  components: { BlogHeader },
+  components: { BlogHeaderPC,BlogHeaderPhone },
   data() {
     return {
       article: {},
@@ -159,6 +161,22 @@ export default {
 </script>
 
 <style lang="less" >
+@media screen and (min-width: 480px) and (max-width: 2000px) {
+  .max_header .pc{
+              display: block;
+            }
+            .max_header .phone{
+              display:none;
+            }
+}
+@media screen and (min-width: 320px) and (max-width: 480px) {
+            .max_header .pc{
+              display: none;
+            }
+            .max_header .phone{
+              display:block;
+            }
+}
 .detail {
   background-color: #f2f2f2;
   width: 100%;

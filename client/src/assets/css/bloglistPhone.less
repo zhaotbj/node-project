@@ -1,0 +1,73 @@
+@media screen and (min-width: 320px) and (max-width: 480px) {
+          
+    .category {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 5px;
+        
+        h1{
+          display: none;
+        }
+        .category_item {
+          text-decoration: none;
+          color: #333;
+          font-size: 13px;
+          padding: 3px 10px;          
+        }
+        .active {
+          color: #fff;
+          background-color: #333;
+        }
+      }
+
+
+      .list {
+        font-size: 13px;
+        .list_item {
+        //   height: 130px;
+          border: 1px solid #ebedf0;
+          padding: 5px 5px;
+          cursor: pointer;
+          margin-bottom: 20px;
+          .date {
+            color: #399ab2;
+          }
+          .description {
+            cursor: pointer;
+      
+            // line-height: 2;
+            // border-left: 3px solid #9cba39;
+            padding: 0 3px;
+            .item_title {
+              color: #333;
+              font-size: 13px;
+              font-weight: 500;
+            }
+            .desc {
+              color: #555;
+            }
+          }
+          .summary {
+            display: none;
+          }
+          .list-item-action {
+            display: flex;
+            justify-content: flex-start;
+            margin-top: 6px;
+            line-height: 1.5;
+            color:#a5a5a5;
+            p {
+              padding: 0 5px;
+              font-size: 12px;
+            }
+          }
+          .time,.commentNumber,.thumbUpNumber,.auth,.cate{
+              display: none;
+          }
+        }
+        .list_item:hover {
+          background: #effbff;
+          box-shadow: 0 15px 30px 0 rgba(0, 0, 0, 0.1);
+        }
+      }
+}

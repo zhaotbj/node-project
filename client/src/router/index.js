@@ -11,10 +11,9 @@ const router = new Router({
     {
       path: '/',
       component: () => import("../views/index.vue"),
-      redirect:"/list",
       children: [
         {
-          path:"/list",
+          path:"/",
           name:"list",
           component: ()=> import("../views/blog/bloglist.vue")
         },
@@ -27,16 +26,6 @@ const router = new Router({
           path: "/about",
           name:"about",
           component: () => import("../views/blog/about.vue")
-        },
-        {
-          path:"/login",
-          name:"login",
-          component: () => import("../views/login/login.vue")
-        },
-        {
-          path:"/register",
-          name:"register",
-          component: () => import("../views/login/register.vue")
         }
       ]
     },
@@ -49,6 +38,16 @@ const router = new Router({
       path:"/_id/:id",
       name:"detail",
       component: () => import("../views/blog/detail.vue")
+    },
+    {
+      path:"/login",
+      name:"login",
+      component: () => import("../views/login/login.vue")
+    },
+    {
+      path:"/register",
+      name:"register",
+      component: () => import("../views/login/register.vue")
     }
   ]
 });
