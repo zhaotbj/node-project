@@ -5,7 +5,7 @@
             <div class="">
               <el-col :span="10"><div class=""><router-link to="/" style="color:#333">{{userInfo.userName|| '路飞'}}的博客</router-link></div></el-col>
               <el-col :span="12"><div class="">
-                <el-input class="search_input" v-model="input" placeholder="请输入内容"></el-input></div>
+                <el-input class="search_input" v-model="input" @keyup.enter.native="search" placeholder="请输入内容"></el-input></div>
                 </el-col>
             </div>
             </el-col>
@@ -48,8 +48,13 @@ export default {
       if(userInfo &&userInfo.userId){
        this.iswrite = true;
       }
+  },
+  methods:{
+    search(){
+      console.log('---', this.input);
+      this.$Bus.$emit('searchEmit',this.input)
+    }
   }
- 
 }
 </script>
 

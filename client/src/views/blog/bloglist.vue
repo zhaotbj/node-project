@@ -56,12 +56,21 @@ export default {
       listData: [],
       categoryobj: [],
       category:[],
-      activeId:0
+      activeId:0,
+      activeRow: {}
     };
   },
   mounted() {
     this.getCateData();
     this.getBlogList();
+    this.$Bus.$on('searchEmit',(value)=>{
+      console.log('bus', value);
+      if(value)  {
+        this.activeId = 0
+        this.activeRow = {}
+        }
+      this.getBlogList({cateId: this.activeRow.value, search: value})
+    })
   },
   methods: {
     ...mapActions({
@@ -71,7 +80,8 @@ export default {
     handleCategory(row,i){
       console.log(row);
       this.activeId = i;
-      this.getBlogList(row.value);
+      this.activeRow= row;
+      this.getBlogList({cateId: row.value, search: ''});
     },
     async getBlogList(params) {
       const res = await this.getHomeList(params? params: '');

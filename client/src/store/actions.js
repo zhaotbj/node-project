@@ -29,7 +29,7 @@ const actions = {
 
   // 首页
   async getHomeList({ commit }, params) {
-    return await service.get('/article/getAllList?id='+params);
+    return await service.post('/article/getAllList', params);
   },
 
   // 获取文章详情

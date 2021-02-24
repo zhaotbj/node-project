@@ -6,7 +6,7 @@
       </li>
       <li>首页</li>
       <li>
-        <el-input size="mini" v-model="search" placeholder="搜搜"></el-input>
+        <el-input size="mini" v-model="input" @keyup.enter.native="search" placeholder="搜搜"></el-input>
       </li>
       <el-avatar class="avatar" size="medium"  :src="userInfo.avatar" v-if="userInfo.avatar"></el-avatar>
       <router-link class="link_login" to="/login"
@@ -30,10 +30,14 @@ export default {
   },
   data() {
     return {
-      search: "",
+      input: "",
     };
   },
   methods: {
+    search(){
+      console.log('---', this.input);
+      this.$Bus.$emit('searchEmit',this.input)
+    },
     goHome() {
         if(this.$route.path == "/list"|| this.$route.path == "/"){
             return

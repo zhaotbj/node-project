@@ -14,6 +14,10 @@ rewirteLog();
 import mavonEditor from 'mavon-editor'  //引入mavon-editor 就是上面所安装的
 Vue.use(mavonEditor)  //让Vue使用mavonEditor
 Vue.config.productionTip = false;
+const Bus = new Vue()
+Vue.use(Bus)
+Vue.prototype.$Bus = Bus
+
 new Vue({
   router,
   store,

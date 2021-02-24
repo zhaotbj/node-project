@@ -10,34 +10,34 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      component: () => import("../views/index.vue"),
+      component: () => import(/* webpackChunkName: "list" */ "../views/index.vue"),
       children: [
         {
           path:"/",
           name:"list",
-          component: ()=> import("../views/blog/bloglist.vue")
+          component: ()=> import(/* webpackChunkName: "list" */ "../views/blog/bloglist.vue")
         },
         {
           path: '/archives',
           name:"archives",
-          component: () => import("../views/blog/archives.vue")
+          component: () => import(/* webpackChunkName: "archives" */ "../views/blog/archives.vue")
         },
         {
           path: "/about",
           name:"about",
-          component: () => import("../views/blog/about.vue")
+          component: () => import(/* webpackChunkName: "about" */ "../views/blog/about.vue")
         }
       ]
     },
     {
       path:"/write",
       name:"write",
-      component: () => import("../views/blog/write.vue")
+      component: () => import(/* webpackChunkName: "write" */ "../views/blog/write.vue")
     },
     {
       path:"/_id/:id",
       name:"detail",
-      component: () => import("../views/blog/detail.vue")
+      component: () => import(/* webpackChunkName: "detail" */ "../views/blog/detail.vue")
     },
     {
       path:"/login",

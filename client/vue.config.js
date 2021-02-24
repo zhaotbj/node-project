@@ -5,6 +5,7 @@
 module.exports = {
   publicPath: '/',
   lintOnSave: false,
+  productionSourceMap: false,
   devServer: {
     host: '0.0.0.0',
     port: 8080,

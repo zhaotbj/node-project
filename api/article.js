@@ -4,15 +4,20 @@ let router = new Router()
 const mongoose = require('mongoose')
 
 // 读取所有文章
-router.get("/getAllList", async (ctx) => {
+router.post("/getAllList", async (ctx) => {
   try {
-    console.log('getAllList', ctx.request.query);
-    let {id} = ctx.request.query;
+    console.log('getAllList', ctx.request.body);
+    let {cateId, search} = ctx.request.body;
     const Article = mongoose.model('Article');
       result = [];
-    if(id){
-     result = await Article.find({"category": Number(id)}).sort({"_id": -1}).exec();
-    } else {
+    if(cateId){
+     
+     result = await Article.find({"category": Number(cateId)}).sort({"_id": -1}).exec();
+    } else if (search) {
+      let reg = new RegExp(search)
+      result = await Article.find({"title": reg}).sort({"_id": -1}).exec();
+    }
+    else{
     result = await Article.find().sort({"_id": -1}).exec();
     }
     ctx.body =  { flag: true, message: "操作成功", data: result };
@@ -73,7 +78,7 @@ router.post("/create", async (ctx) => {
       readNumber: readNumber || 0, // 章阅读量
       commentNumber: commentNumber || 0, // 文章评论数
       thumbUpNumber: thumbUpNumber || 0, // 文章点赞数
-      time: date(), //  创建时间
+      time: new Date().toLocaleString(), //  创建时间
       modifiedTime: '', //修改时间
     }
 
