@@ -5,8 +5,9 @@
         <span class="el-icon-s-promotion"></span>
       </li>
       <li>首页</li>
-      <li>
+      <li class="search_box">
         <el-input size="mini" v-model="input" @keyup.enter.native="search" placeholder="搜搜"></el-input>
+        <span class="el-icon-search" @click="search"></span>
       </li>
       <el-avatar class="avatar" size="medium"  :src="userInfo.avatar" v-if="userInfo.avatar"></el-avatar>
       <router-link class="link_login" to="/login"
@@ -72,6 +73,17 @@ export default {
       line-height: 1.5;
       background: #ec7259;
       border-color: #ec7259;
+    }
+
+    .search_box {
+      position: relative;
+      cursor: pointer;
+      .el-icon-search {
+        position: absolute;
+        right: 6px;
+        top: 6px;
+        font-size: 18px;
+      }
     }
   }
 }

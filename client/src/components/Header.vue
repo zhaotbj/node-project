@@ -4,8 +4,10 @@
           <el-col :span="12">
             <div class="">
               <el-col :span="10"><div class=""><router-link to="/" style="color:#333">{{userInfo.userName|| '路飞'}}的博客</router-link></div></el-col>
-              <el-col :span="12"><div class="">
-                <el-input class="search_input" v-model="input" @keyup.enter.native="search" placeholder="请输入内容"></el-input></div>
+              <el-col :span="12">
+                <div class="search_box">
+                <el-input class="search_input" v-model="input" @keyup.enter.native="search" placeholder="请输入内容"></el-input>
+                <span class="el-icon-search" @click="search"></span></div>
                 </el-col>
             </div>
             </el-col>
@@ -109,8 +111,21 @@ export default {
   
 }
 .search_input {
+  
   .el-input__inner {
     border: none;
+  }
+  
+
+}
+.search_box {
+  position: relative;
+  cursor: pointer;
+  .el-icon-search {
+    position: absolute;
+    right: 50px;
+    top: 24px;
+    font-size: 18px;
   }
 }
 

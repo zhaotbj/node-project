@@ -2,7 +2,7 @@ const Router = require('koa-router')
 let router = new Router()
 
 const mongoose = require('mongoose')
-
+const {formateTime} = require('../common/common.js')
 // 读取所有文章
 router.post("/getAllList", async (ctx) => {
   try {
@@ -13,6 +13,9 @@ router.post("/getAllList", async (ctx) => {
     if(cateId){
      
      result = await Article.find({"category": Number(cateId)}).sort({"_id": -1}).exec();
+     result.map(v=> {
+      v.createTime = formateTime(v.createTime)
+     })
     } else if (search) {
       let reg = new RegExp(search)
       result = await Article.find({"title": reg}).sort({"_id": -1}).exec();
