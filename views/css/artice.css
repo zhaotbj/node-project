@@ -1,0 +1,17 @@
+.post-header  {
+    text-align: center;
+    margin: 10px 0 30px;
+}
+.post-header  h1{
+    margin-bottom: 1rem;
+    line-height: 2rem;
+}
+.post-header {
+    color: #999;
+}
+.post-header .title {
+    color: #24292e;
+}
+.post-meta {
+    display: inline-block;
+}

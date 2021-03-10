@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="/css/artice.css">
+<link rel="stylesheet" href="/css/markdown.css">
+
+<article class="post_artice">
+    <header class="post-header">
+        <h1 class="title">
+            <%- articInfo.title %>
+        </h1>
+        <span class="time">
+
+            <%- articInfo.createTime %>
+        </span>
+        <span class="slash">/</span>
+        <span class="post-meta">
+            <span class="post-tags">
+                <ul class="article-tag-list">
+                    <li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redux/">
+                            <%- articInfo.category %>
+                        </a>
+                    </li>
+                </ul>
+            </span>
+        </span>
+        <span class="slash">/</span>
+        <span class="read">
+            <span id="busuanzi_value_page_pv">
+                <%- articInfo.readNumber %>
+            </span> 点击
+        </span>
+        <span class="slash">/</span>
+        <span class="read">赞<%- articInfo.commentNumber %></span>
+    </header>
+    <div class="markdown-body">
+        <%-articInfo.content %>
+    </div>
+
+</article>

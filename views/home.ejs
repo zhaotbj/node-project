@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="/css/main.css">
+<ul class="entry_list">
+    <% list.forEach(function(item){ %>
+        <li>
+            <div class="content">
+                <article class="post_article">
+                    <ul class="meta_row">
+                        <li class="date"><%- item.createTime %></li> &nbsp;•
+                        <li class="category"><%- item.category %></li>
+                    </ul>
+                    <a href="">
+                        <h2><%- item.title %></h2>
+                    </a>
+                    <div class="post-excerpt">
+                        <p><%- item.summary %></p>
+                    </div>
+                    <a href="/article/<%- item._id %>" class="more"> 阅读全文〉</a>
+                </article>
+            </div>
+        </li>
+      <% }); %>
+   
+</ul>

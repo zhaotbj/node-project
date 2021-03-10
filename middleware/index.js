@@ -23,13 +23,13 @@ module.exports = (app) => {
 //  app.use(views(path.join(__dirname, "../dist"), {
 //     extension: "html",
 //   }))
-  // render(app, {
-  //   root: path.join(__dirname, '../client/dist'),
-  //   layout: 'index',
-  //   viewExt: 'html',
-  //   cache: false,
-  //   debug: true
-  // });
+  render(app, {
+    root: path.join(__dirname, '../views'),
+    layout: 'index',
+    viewExt: 'ejs',
+    cache: false,
+    debug: true
+  });
   
   // app.use(miSend())
 

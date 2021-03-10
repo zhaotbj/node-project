@@ -1,14 +1,57 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title><%= blog.title %></title>
-    <link href="https://cdn.bootcdn.net/ajax/libs/semantic-ui/0.12.2/css/semantic.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/semantic-ui/0.12.2/javascript/semantic.min.js"></script>
-  </head>
-  <body>
-  <%- include('components/nav') %>
-  <%- include('components/nav-setting') %>
-  <%- include('components/notification') %>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>blog</title>
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/font/iconfont.css">
+</head>
+
+<header class="main_header">
+  <div class="container">
+    <a class="logo" href="/">
+      <span class="blog_title">博客</span>
+      <img width="38"
+       height="38"
+        src="/logo.png"
+        alt=""></a>
+
+    <nav class="main_header">
+      <ul class="nav_list">
+        <li class="nav_item pc">
+          <ul class="link">
+            <li class="active">
+              <a href="/">首页</a>
+            </li>
+            <li><a href="/archives">归档</a></li>
+            <li><a href="about">关于</a></li>
+          </ul>
+        </li>
+        <div class="nav_down">
+          <span>首页</span>
+          <span class="icon iconfont icon-arrow-down-bold"></span>
+          <ul class="select">
+            <li class="active">
+              <a href="/">首页</a>
+            </li>
+            <li><a href="/archives">归档</a></li>
+            <li><a href="about">关于</a></li>
+          </ul>
+        </div>
+        <li class="nav_item search">
+          <form action="get" class="search_form">
+            <input type="text">
+            <span class="icon iconfont icon-search"></span>
+          </form>
+        </li>
+        <li class="nav_item">
+          <a href="/about">关于</a>
+        </li>
+        <!-- <li class="nav_item"></li> -->
+      </ul>
+    </nav>
+  </div>
+</header>

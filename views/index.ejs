@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="/css/media.css">
+<link rel="stylesheet" href="/css/common.css">
+<body>
+    <%- include('header'); -%>
+    <main class="view_container">
+      <div class="main_container">
+            <div class="enter_wrap">
+              <% if (page.tab==='index') { %>
+                <%- include('home', {list:page.list}); -%>
+              <% } else if(page.tab==='archives') {  -%>
+                 <%- include('archives'); -%>
+                 <% }  else if(page.tab==='about') {  -%>
+                  <%- include('about', {aboutInfo: page.aboutInfo}); -%>
+                  <% }  else if(page.tab==='article') {  -%>
+                   
+                    <%- include('article', {articInfo: page.articInfo}); -%>
+                    <% } %>
+              
+            </div>
+
+
+            <% if(page.tab==='index'){ %>
+               <div class="right_container">right</div>
+               <%}  %>
+           
+      </div>
+     
+    </main>
+   
+    <%- include('footer'); -%>
+</body>
+</html>

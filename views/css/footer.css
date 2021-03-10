@@ -1,0 +1,18 @@
+.main_footer {
+    width: 100%;
+    min-height: 3rem;
+    font-size: 1.2rem;
+    color: #909090;
+    position: fixed;
+    bottom: 0;
+}
+.main_footer .footer_inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100%;
+}
+.main_footer .footer_inner a{
+    margin: 0 5px;
+}

@@ -1,0 +1,17 @@
+.about{
+    margin-top: 2rem;
+  }
+  .avatar_title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .about_dec {
+    margin-left: 1rem;
+  }
+  .link_to {
+    color: #1890ff;
+  }
+  .describe li {
+    margin: 3px 0;
+  }

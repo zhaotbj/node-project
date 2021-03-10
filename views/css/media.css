@@ -1,0 +1,40 @@
+@media (max-width: 980px){
+    html{font-size:14px!important;}
+    .container {
+        width: 98%;
+    }
+    .container .nav_list .pc{
+        display: none;
+    }
+    .container .blog_title {
+        display: none;
+    }
+   .container .search {
+       width: 55%;
+   }
+
+   .right_container {
+      display: none;
+   }
+  
+}
+@media (min-width: 980px){
+    .main_header .nav_down {
+        display: none;
+       }
+       .main_container {
+        max-width: 960px;
+        margin: 0 auto;
+        /* background-color: #ccc; */
+       display: flex;
+       justify-content: space-between;
+        }
+        .enter_wrap {
+            flex: 1;
+        }
+    
+       .right_container {
+        min-width: 270px;
+        /* background-color: blue; */
+    }
+}
