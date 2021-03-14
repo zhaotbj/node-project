@@ -1,1 +1,64 @@
-<h1>归档</h1>
+<link rel="stylesheet" href="./css/archive.css">
+<section>
+    <h2 class="archive_year">2021</h2>
+    <div class="archive_content">
+        <ul class="archive">
+            <li>
+                <span class="date">2-3</span>&nbsp;/
+                <span class="cate">分类</span>&nbsp;/
+                <a href="">
+                    我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题
+                </a>
+                
+            </li>
+            <li>
+                <span class="date">2-3</span>&nbsp;/
+                <span class="cate">分类</span>&nbsp;/
+                <a href="">
+                    我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题
+                </a>
+            </li>
+            <li>
+                <span class="date">2-3</span>&nbsp;/
+                <span class="cate">分类</span>&nbsp;/
+                <a href="">
+                    我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题我是标题
+                </a>
+            </li>
+        </ul>
+    </div>
+    <ul class="pagination">
+        <li><a href="javascript:void(0)"></a></li>
+        <li><a href="javascript:void(0)">1</a></li>
+        <li><a class="active" href="javascript:void(0)">2</a></li>
+        <li><a href="javascript:void(0)">3</a></li>
+        <li><a href="javascript:void(0)">4</a></li>
+        <li><a href="javascript:void(0)">5</a></li>
+        <li><a href="javascript:void(0)">6</a></li>
+        <li><a href="javascript:void(0)">7</a></li>
+        <li><a href="javascript:void(0)">8</a></li>
+        <!-- <li><a href="javascript:void(0)"><span class="space">...</span></a></li> -->
+        <li><a href="javascript:void(0)">9</a></li>
+        <li><a href="javascript:void(0)">10</a></li>
+        <li><a href="javascript:void(0)"></a></li>
+      </ul>
+</section>
+<script>
+    const lis = document.querySelectorAll('.pagination>li')
+    const space = document.querySelector(".space")
+    lis.forEach(ele=>{
+        ele.addEventListener('click', function(event){
+            if(event.target.innerText ==='...') return
+            console.log(event.target,event.target.innerText);
+            pagin(event)
+
+        })
+    })
+    function pagin(event){
+       const actives= document.querySelectorAll('.pagination>li>a')
+       actives.forEach(ele=>{
+       ele.classList.remove("active")
+        })
+            event.target.classList.add('active')
+    }
+</script>

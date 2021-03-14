@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/css/media.css">
 <link rel="stylesheet" href="/css/common.css">
 <body>
-    <%- include('header'); -%>
+    <%- include('header', {tab: page.tab}); -%>
     <main class="view_container">
       <div class="main_container">
             <div class="enter_wrap">
@@ -20,7 +20,41 @@
 
 
             <% if(page.tab==='index'){ %>
-               <div class="right_container">right</div>
+               <div class="right_container">
+                
+                <div class="cell">
+                  <span class="title">分类</span>
+                  <div class="cate">
+                    <a href="" class="item_node">1</a>
+                    <a href="" class="item_node">3</a>
+                    <a href="" class="item_node">4</a>
+                    <a href="" class="item_node">1</a>
+                    <a href="" class="item_node">3</a>
+                    <a href="" class="item_node">4</a>
+                    <a href="" class="item_node">1</a>
+                    <a href="" class="item_node">3</a>
+                    <a href="" class="item_node">4</a>
+                    <a href="" class="item_node">1</a>
+                    <a href="" class="item_node">3</a>
+                    <a href="" class="item_node">4</a>
+                  </div>
+                </div>
+                
+                <div class="cell">
+                  <span class="title">随笔档案</span>
+                  <ul class="archive_year">
+                    <li><a href="">2020年3月(1)</a></li>
+                    <li><a href="">2020年3月(2)</a></li>
+                    <li><a href="">2020年3月</a></li>
+                    <li><a href="">2020年3月</a></li>
+                    <li><a href="">2020年3月</a></li>
+                    <li><a href="">2020年3月</a></li>
+                    <li><a href="">2020年3月</a></li>
+                    <li><a href="">2020年3月</a></li>
+                    <li><a href="">2020年3月</a></li>
+                  </ul>
+                </div>
+               </div>
                <%}  %>
            
       </div>
@@ -28,5 +62,6 @@
     </main>
    
     <%- include('footer'); -%>
+    <script src="/js/mian.js"></script>
 </body>
 </html>

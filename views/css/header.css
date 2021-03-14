@@ -1,8 +1,11 @@
-.main_header{
-    background: #fff;
-    border-bottom: 1px solid #f1f1f1;
-    color: #909090;
-    height: 5rem;
+.nav-container {
+    display: -ms-flexbox;
+    display: flex;
+    position: fixed;
+    z-index: 100;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
 }
 .container{
     max-width: 960px;
@@ -12,7 +15,14 @@
     height: 100%;
 }
 .main_header{
+    background: #fff;
+    border-bottom: 1px solid #f1f1f1;
+    color: #909090;
+    height: 5rem;
     flex: 1 0 auto;
+    /* position: fixed; */
+    /* width: 100vw; */
+    /* top: 0; */
 }
 .logo{
     display: flex;
@@ -30,7 +40,7 @@
     height: 100%;
 }
 .nav_list .nav_item{
-    font-size: 1.33rem;
+    font-size: 1.6rem;
 }
 .nav_item .link {
     display: flex;
@@ -38,7 +48,6 @@
 }
 .nav_item .link li{
     padding: 0 1.5rem;
-    font-size: 1.33rem;
 }
 .search_form{
     border: 1px solid hsla(0,0%,59.2%,.2);
@@ -79,6 +88,7 @@
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
     border: 1px solid rgba(177,180,185,.45);
     border-radius: 4px;
+    display: none;
 }
 .nav_list .nav_down .select li{
     margin:2px 0;

@@ -1,0 +1,65 @@
+.archive_content {
+    padding-left: 1rem;
+}
+.archive_year {
+    padding-top: 1rem;
+}
+.archive_content .archive{
+    border-left: 1.4px dashed #ccc;
+    padding: .5rem 0 .5rem 1rem;
+    font-size: 1.3rem;
+    color: #909090;
+}
+.archive_content .archive li{
+    position: relative;
+    padding: 1rem 0;
+    font-weight: 300;
+}
+.archive_content .archive li::before{
+    position: absolute;
+    top: 1.2rem;
+    left: -1.6rem;
+    z-index: 1;
+    display: block;
+    content: "";
+    background-color: #2196F3;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+.archive_content .archive li a{
+    padding-left: 1rem;
+    color: #999;
+}
+.archive_content .archive li a:hover{
+    color: #2196F3;
+ }
+.archive_content .archive .date {
+    letter-spacing: 2px;
+}
+
+ul.pagination {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    margin-top: 1rem;
+}
+
+ul.pagination li {display: inline;}
+
+ul.pagination li a {
+    color: #909090;
+    float: left;
+    padding: 0.6rem 1.2rem;
+    text-decoration: none;
+}
+ul.pagination li:first-child a:after {
+    content: "<";
+}
+ul.pagination li:last-child a:after {
+    content: ">";
+}
+ul.pagination li .active {
+    color: #2196F3;
+}

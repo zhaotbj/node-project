@@ -18,6 +18,7 @@ module.exports = (app) => {
        await ctx.render('index', {
         page: {
           tab: "index",
+          
           list: result
         }
        });
