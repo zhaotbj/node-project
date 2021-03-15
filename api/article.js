@@ -97,8 +97,7 @@ router.post("/delete", async (ctx) => {
   try {
     let id = ctx.request.body.id;
     const Article = mongoose.model('Article');
-    const ArticleContent = mongoose.model('ArticleContent');
-    // let deleteArticle = new ArticleContent();
+  
     const result = await Article.remove({ id: id })
     console.log(result,'删除结果')
     if (result.deletedCount > 0) {
