@@ -81,6 +81,6 @@ module.exports = (app) => {
   });
   router.use("/user", user.routes());
   router.use("/home", home.routes());
-  // router.use("/article", article.routes());
+  router.use("/essay", article.routes());
   app.use(router.routes()).use(router.allowedMethods());
 };

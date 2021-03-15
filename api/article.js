@@ -48,15 +48,8 @@ router.get("/getContentById", async (ctx) => {
   console.log(ctx.request.query, '参数')
   try {
     let {id} = ctx.request.query
-    // const ArticleContent = mongoose.model('ArticleContent');
     const Article = mongoose.model('Article');
-    // 
-    // let resultArticle = await Article.findOne({_id:id}).exec();
-    // thumbUpNumber
-    // let num = resultArticle.readNumber;
-    // num +=1;
-    // console.log('readNumber::',resultArticle.readNumber,'num::',num,resultArticle.id);
-    // let update = await Article.update({_id: id},{$set:{readNumber: num}});
+
     let reuslt = await Article.findOne({_id:id}).exec();
     ctx.body =  { flag: true, message: "操作成功", data: reuslt };
   } catch (error) {
