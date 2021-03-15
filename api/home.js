@@ -33,33 +33,21 @@ router.post("/upload", async (ctx) => {
 })
 
 
-// 分类写固定
-router.get("/addCategory", async(ctx) =>{
-	let obj = {
-		1: 'Vue',
-		2: "React",
-		3:'Node.js',
-		4: '小程序',
-		5: 'Mysql',
-		6: 'Linux',
-		7: '随笔',
-		8: '未分类'
-	}
+// 新增分类
+router.post("/addCategory", async(ctx) =>{
 	try {
+		const {cateName} = ctx.request.body;
+		if(cateName ==''|| !cateName) {
+			ctx.body = { flag: false, message: '不能为空' };
+			return
+		}
 		let Category = mongoose.model("Category");
 		
-		let promiseArr = [];
-		for(var key in obj) {
-			 let promise = new Category({
-				name: obj[key],
-				value: key,
-				create_time: Date.now().toString()
-		   }).save();
-		   promiseArr.push(promise);
-		}
-	   let result = await  Promise.all(promiseArr).then(res=>{
-			return res;
-		})
+	const  result=  await  new Category({
+					name: cateName,
+					createTime: Date.now().toString()
+			}).save();
+	   
 		ctx.body = {flag: true, data: result}
 		
 	} catch (error) {
@@ -67,14 +55,35 @@ router.get("/addCategory", async(ctx) =>{
 	}
 })
 
+// 查询分类
 router.get('/getCategory', async(ctx) =>{
 	let Category = mongoose.model("Category");
 	const reuslt =await Category.find({});
 	ctx.body = {flag: true, data: reuslt};
 
 })
- 
-
+//  修改分类
+router.post("/updateCategory", async(ctx) =>{
+	try {
+		const {id, cateName} = ctx.request.body;
+		if(id ==''|| !id || cateName==='' || !cateName) {
+			ctx.body = { flag: false, message: '不能为空' };
+			return
+		}
+		let category = mongoose.model("Category");
+		
+	const  result =  await   category.update({_id: id}, {name:cateName,  updateTime: Date.now().toString()})
+		if(result.ok>0) {
+			ctx.body = {flag: true, data: '修改成功'}
+		} else {
+			ctx.body = {flag: true, data: result,message:"修改失败"}
+		}
+		
+		
+	} catch (error) {
+		ctx.body = { flag: false, message: "失败" + error };
+	}
+})
 // 归档
 router.get("/archives", async(ctx) =>{
 	const Article = mongoose.model('Article');

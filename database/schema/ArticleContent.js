@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const Schema=mongoose.Schema // 申明scheme
+const Schema=mongoose.Schema // 声明scheme
 const ArticleContentSchema = new Schema({
   id: String,
   userId:String, // 用户id
