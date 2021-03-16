@@ -1,45 +1,49 @@
-const mongoose = require('mongoose')
-const bcrypt = require("bcryptjs")
-const SALT_WORK_FACTOR=10  // 设置加盐的长度
-const Scheme=mongoose.Schema // 申明scheme
-let ObjectId=Scheme.Types.ObjectId // 声明object类型
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+// 密码哈希的加密算法
+const bcrypt = require('bcryptjs');
+const SALT_WORK_FACTOR = 10; //定义加密密码计算强度
 
-// 创建我们的用户scheme
-const userSchema=new Scheme({
-  userId: {type:String, default:new Date().getTime()},
-  userName:{unique:true,type:String},
-  password:{unique:true,type:String},
-  avatar: { type: String, required: false }, // 头像
-  gender: { type: String,type:String}, // 性别
-  bio: { type: String, required: false },
-  createAt:{type:Date, default:Date.now()},
-  lastLoginAt:{type:Date, default:Date.now()}
+const userSchema = new Schema({
+    userName: {type: String, unique: true},
+    password: String,
+    mobilePhone: String, // 手机号
+    email: {type:String, default:""},
+    gender: {type:String, default:"男", enum: ['男','女','保密']},
+    avatar: {type:String, default:"http://img4.imgtn.bdimg.com/it/u=198369807,133263955&fm=27&gp=0.jpg"},
+    year: {type:Number, default:new Date().getFullYear()},
+    month: {type: Number, default: new Date().getMonth() + 1},
+    day: {type: Number, default: new Date().getDate() },
+    createAt: {type: Date, default: Date.now()} // 创建数据库的时间
 })
-// 使用 bcrypt 哈希加密
-userSchema.pre("save", function(next){
-  bcrypt.genSalt(SALT_WORK_FACTOR, (err,salt)=>{
-    if(err) return next(err)
-    bcrypt.hash(this.password,salt,(err,hash)=>{
-      if(err) return next(err)
-      this.password=hash
-      next()
-    })
-  })
-})
+/**
+ * 对密码进行加盐
+ * 使用 pre 中间件在用户信息存储前执行
+ */
+userSchema.pre('save', function(next) {
+    // 进行加密 | 产生一个 salt
+    bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
+      if (err) return next(err);
+      // 结合 salt 产生新的hash
+      bcrypt.hash(this.password, salt, (err, hash) => {
+        if (err) return next(err);
+        // 使用 hash 覆盖明文密码
+        this.password = hash;
+        next();
+      });
+    });
+  });
 
-
-userSchema.methods= {
-  // 密码比对的方法
-  comparePassword:(_password,password)=>{
-    return new Promise((resolve,reject)=>{
-      bcrypt.compare(_password, password, (err, isMatch)=>{
-        if(!err) resolve(isMatch)
-        else reject(err)
-      })
-    })
-  }
-}
-
-// 发布模型
-module.exports = mongoose.model("User",userSchema);
-
+/**
+ * 密码比对的方法
+ * 第一个参数：客户端传递的; 第二个参数：数据库的
+ */
+userSchema.methods.comparePassword = (_password, password) => {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(_password, password, (error, result) => {
+        !error ? resolve(result) : reject(error);
+      });
+    });
+  };
+//发布模型
+module.exports = mongoose.model('User', userSchema);

@@ -1,10 +1,10 @@
 const Router = require("koa-router")
 const router = new Router()
-
+const checkUserStat = require('../middleware/checkUserStat');
 const mongoose = require('mongoose');
 
 // 新增分类
-router.post("/addCategory", async(ctx) =>{
+router.post("/addCategory", checkUserStat, async(ctx) =>{
 	try {
 		const {cateName} = ctx.request.body;
 		if(cateName ==''|| !cateName) {
@@ -26,14 +26,14 @@ router.post("/addCategory", async(ctx) =>{
 })
 
 // 查询分类
-router.get('/getCategory', async(ctx) =>{
+router.get('/getCategory', checkUserStat, async(ctx) =>{
 	let Category = mongoose.model("Category");
 	const reuslt =await Category.find({});
 	ctx.body = {flag: true, data: reuslt};
 
 })
 //  修改分类
-router.post("/updateCategory", async(ctx) =>{
+router.post("/updateCategory", checkUserStat, async(ctx) =>{
 	try {
 		const {id, cateName} = ctx.request.body;
 		if(id ==''|| !id || cateName==='' || !cateName) {
@@ -55,7 +55,7 @@ router.post("/updateCategory", async(ctx) =>{
 	}
 })
 
-router.delete("/dropCategory", async(ctx) =>{
+router.delete("/dropCategory",checkUserStat,  async(ctx) =>{
 	try {
 		const {id} = ctx.request.query;
 		if(id ==''|| !id) {

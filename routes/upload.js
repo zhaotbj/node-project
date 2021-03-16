@@ -1,10 +1,11 @@
 const Router = require('koa-router')
 const router = new Router()
-const api = 'http://39.100.82.50:3000'
+const {api} = require("../util/config")
 const path = require("path");
 const fs = require('fs');
+const checkUserStat = require('../middleware/checkUserStat');
 // 上传图片
-router.post("/upload", async (ctx) => {
+router.post("/upload", checkUserStat,  async (ctx) => {
 	console.log(ctx.request.files.file, 'upload---');
 	try {
 		let { file } = ctx.request.files;

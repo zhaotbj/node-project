@@ -4,6 +4,7 @@ let router = new Router()
 const mongoose = require('mongoose')
 const ArticleService = require('../service/article.js')
 const {formateTime} = require('../util/util.js')
+const checkUserStat = require('../middleware/checkUserStat');
 // 读取所有文章
 router.post("/getAllList", async (ctx) => {
   try {
@@ -30,7 +31,7 @@ router.get("/getEssayById", async (ctx) => {
 })
 
 // 添加文章
-router.post("/create", async (ctx) => {
+router.post("/create",checkUserStat, async (ctx) => {
   console.log(ctx.request.body, '添加参数');
   try {
    const result = await ArticleService.addArticle(ctx.request.body)
@@ -43,7 +44,7 @@ router.post("/create", async (ctx) => {
 })
 
 // 删除文章
-router.post("/delete", async (ctx) => {
+router.post("/delete",checkUserStat, async (ctx) => {
   console.log(ctx.request.body, '删除参数');
   try {
     let id = ctx.request.body.id;
@@ -63,7 +64,7 @@ router.post("/delete", async (ctx) => {
 
 })
 // 编辑
-router.post("/update", async (ctx) => {
+router.post("/update",checkUserStat, async (ctx) => {
   console.log(ctx.request.body, 'update参数');
   try {
 
