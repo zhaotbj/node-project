@@ -41,5 +41,5 @@ userSchema.methods= {
 }
 
 // 发布模型
-mongoose.model("User",userSchema);
+module.exports = mongoose.model("User",userSchema);
 

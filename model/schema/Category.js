@@ -6,4 +6,4 @@ const categorySchema = new Schema({
     createTime: String,
     updateTime:{ type: String, unique: false}
 })
-mongoose.model('Category',categorySchema)
+module.exports =  mongoose.model('Category',categorySchema)

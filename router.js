@@ -1,8 +1,10 @@
 const Router = require("koa-router");
-let router = new Router();
-let user = require("./api/user");
-let home = require("./api/home.js");
-let article = require("./api/article.js");
+const router = new Router();
+const user = require("./routes/user");
+const home = require("./routes/home.js");
+const article = require("./routes/article.js");
+const upload = require("./routes/upload.js")
+const category = require('./routes/category.js')
 const mongoose = require('mongoose')
 module.exports = (app) => {
   // 引入user模块
@@ -79,8 +81,12 @@ module.exports = (app) => {
       
       // await ctx.render('index');
   });
-  router.use("/user", user.routes());
-  router.use("/home", home.routes());
-  router.use("/essay", article.routes());
+
+  
+  router.use("/user", user.routes()); // 用户相关
+  router.use("/home", home.routes()); // 
+  router.use("/file", upload.routes()); // 文件相关
+  router.use("/cate", category.routes()); // 标签
+  router.use("/essay", article.routes()); // 文章
   app.use(router.routes()).use(router.allowedMethods());
 };
