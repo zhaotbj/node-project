@@ -50,7 +50,7 @@ router.post("/delete",checkUserStat, async (ctx) => {
     let id = ctx.request.body.id;
     const Article = mongoose.model('Article');
   
-    const result = await Article.remove({ id: id })
+    const result = await Article.remove({ _id: id })
     console.log(result,'删除结果')
     if (result.deletedCount > 0) {
       ctx.body = { flag: true, message: "删除成功", data: result };
