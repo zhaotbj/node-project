@@ -1,6 +1,7 @@
 const ArticleModel = require("../model/schema/Article")
 const CommentModel = require("../model/schema/Comment")
-
+const CategoryModel = require("../model/schema/Category")
+const {formateTime} = require('../util/util.js')
 class ArticleService {
     /**
      * 获取list列表 后续加分页
@@ -10,20 +11,31 @@ class ArticleService {
      */
     async getList(cateId, search) {
         try {
-            let result = [];
-            if (cateId) {
 
-                result = await ArticleModel.find({ "_id": Number(cateId) }).sort({ "_id": -1 }).exec();
-                result.map(v => {
-                    v.createTime = formateTime(v.createTime)
-                })
-            } else if (search) {
-                let reg = new RegExp(search)
-                result = await ArticleModel.find({ "title": reg }).sort({ "_id": -1 }).exec();
+            let list = await ArticleModel.find().sort({ "_id": -1 }).exec();
+
+            let arr = []; let cateList=[]
+
+            let result = JSON.parse(JSON.stringify(list))
+              result.map(async v=>{
+              arr.push(v.categoryId)
+              })
+            for(let i=0; i<arr.length; i++) {
+             const  cateRes = await CategoryModel.find({"_id": arr[i]})
+             if(cateRes.length>0){
+              cateList.push(cateRes[0])
+             }
             }
-            else {
-                result = await ArticleModel.find().sort({ "_id": -1 }).exec();
-            }
+          
+            for(let i=0; i<result.length; i++)  {
+              for(let j=0; j<cateList.length; j++) {
+                if(result[i].categoryId == cateList[j]._id) {
+                  result[i].category = cateList[j].name
+                }
+              }
+        
+            } 
+
             return result
         } catch (error) {
             console.log(error)
@@ -51,34 +63,37 @@ class ArticleService {
      */
     async addArticle(params) {
         try {
-            const { userId, userName, content, title, categoryId, readNumber, commentNumber, thumbUpNumber, summary, createTime } = params
+            const { userId, userName, content,md, title, categoryId, readNumber, commentNumber, thumbUpNumber, summary, createTime } = params
             const obj = {
                 userId: userId,
                 userName: userName,
                 content: content,
+				md:md,
                 title: title,
                 categoryId: categoryId,
                 summary: summary, //文章简介
-                readNumber: readNumber || 0, // 章阅读量
-                commentNumber: commentNumber || 0, // 文章评论数
-                thumbUpNumber: thumbUpNumber || 0, // 文章点赞数
-                createTime: createTime
+                createTime: Date.now(),
+				readNumber:readNumber, // 章阅读量
+				commentNumber:commentNumber, // 文章评论数
+				thumbUpNumber: thumbUpNumber // 文章点赞数
             }
 
             console.log(obj, '参数')
             for (let key in obj) {
                 if (!obj[key]) {
-                    ctx.body = { flag: false, message: key + "不能为空", data: key + "不能为空" }
-                    return
+					
+                   return { flag: false, message: "不能为空"+key,data : "不能为空"+key  }
+                   
                 }
             }
+			
             // 添加文章内容
             const newArticle = new ArticleModel(obj);
             const result = await newArticle.save();
-            return result;
+            return { flag: true, message: '成功', data : result };
         } catch (error) {
             console.log(error);
-            return Promise.reuslt(error)
+            return Promise.resolve(error)
         }
     }
     /**
@@ -106,16 +121,21 @@ class ArticleService {
             // console.log(editObj, '编辑参数')
             for (let key in editObj) {
                 if (!editObj[key]) {
-                    ctx.body = { flag: false, message: key + "不能为空", data: key + "不能为空" }
-                    return
+                    return { flag: false, message: key + "不能为空", data: key + "不能为空" }
+                    
                 }
             }
 
             const resultUpdata = await ArticleModel.update({ _id: id }, editObj);
-            return resultUpdata
+           
+			if (resultUpdata.nModified > 0) {
+			  return  { flag: true, message: "操作成功", data: resultUpdata };
+			} else {
+			  return { flag: false, message: "操作失败", data: resultUpdata };
+			}
         } catch (error) {
             console.log(error);
-            return Promise.reuslt(error)
+            return { flag: false, message: "操作失败", data: error };
         }
     }
 

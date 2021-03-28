@@ -2,6 +2,7 @@ function formateTime(value) {
     if (!value) {
       return null;
     }
+	typeof value  == 'string' ? value = Number(value): ''
     var d = new Date(value)
   
     var year = d.getFullYear()

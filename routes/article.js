@@ -3,7 +3,7 @@ let router = new Router()
 
 const mongoose = require('mongoose')
 const ArticleService = require('../service/article.js')
-const {formateTime} = require('../util/util.js')
+
 const checkUserStat = require('../middleware/checkUserStat');
 // 读取所有文章
 router.post("/getAllList", async (ctx) => {
@@ -35,7 +35,7 @@ router.post("/create",checkUserStat, async (ctx) => {
   console.log(ctx.request.body, '添加参数');
   try {
    const result = await ArticleService.addArticle(ctx.request.body)
-    ctx.body = { flag: true, message: "保存成功", data: result };
+    ctx.body = result
   } catch (error) {
     console.log(error)
     ctx.body = { flag: false, message: "保存失败",data : error }
@@ -70,14 +70,10 @@ router.post("/update",checkUserStat, async (ctx) => {
 
     const resultUpdata = await ArticleService.updateArticle(ctx.request.body)
     console.log(resultUpdata, '修改结果')
-    if (resultUpdata.nModified > 0) {
-      ctx.body =  { flag: true, message: "操作成功", data: resultUpdata };
-    } else {
-      ctx.body = { flag: false, message: "操作失败", data: resultUpdata };
-    }
+    ctx.body = resultUpdata
   } catch (error) {
     console.log(error)
-    ctx.body = { flag: false, message: "操作失败", data: error };
+    ctx.body = resultUpdata
   }
 
 })

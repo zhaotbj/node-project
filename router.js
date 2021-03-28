@@ -6,6 +6,7 @@ const article = require("./routes/article.js");
 const upload = require("./routes/upload.js")
 const category = require('./routes/category.js')
 const mongoose = require('mongoose')
+const {formateTime} = require('./util/util.js')
 module.exports = (app) => {
   // 引入user模块
   // 装载所有子路由
@@ -15,12 +16,41 @@ module.exports = (app) => {
       console.log('getAllList', ctx.request.body);
       let {cateId, search} = ctx.request.body;
       const Article = mongoose.model('Article');
-      const result = await Article.find().sort({"_id": -1}).exec();
-      // ctx.body={result:result}
+      const list = await Article.find().sort({"_id": -1}).exec();
+	  
+      const Category = mongoose.model('Category')
+
+    let arr = []; let cateList=[]
+
+    let result = JSON.parse(JSON.stringify(list))
+	  result.map(async v=>{
+		  v.createTime = formateTime(v.createTime)
+		  if(v.modifiedTime){
+			  v.modifiedTime = formateTime(v.modifiedTime)
+		  }
+      arr.push(v.categoryId)
+		  
+	  })
+    for(let i=0; i<arr.length; i++) {
+     const  cateRes = await Category.find({"_id": arr[i]})
+     if(cateRes.length>0){
+      cateList.push(cateRes[0])
+     }
+    }
+  
+    for(let i=0; i<result.length; i++)  {
+      for(let j=0; j<cateList.length; j++) {
+        if(result[i].categoryId == cateList[j]._id) {
+          result[i].category = cateList[j].name
+        }
+      }
+
+    }
+      // ctx.body={result:result, cateArr:'cateInfo'}
+	  // return
        await ctx.render('index', {
         page: {
           tab: "index",
-          
           list: result
         }
        });
@@ -59,14 +89,18 @@ module.exports = (app) => {
 
      let {id} = ctx.params
     const Article = mongoose.model('Article');
-    
+    const Category = mongoose.model('Category')
     try {
-      let reuslt = await Article.findOne({_id:id}).exec();
-      // ctx.body={reuslt}
+      const result = await Article.findOne({_id:id}).exec();
+      const cateInfo = await Category.findOne({_id: result.categoryId})
+       result.createTime = formateTime(result.createTime)
+       result.category = cateInfo.name
+		// return ctx.body={result, cateInfo}
+	
       await ctx.render('index', {
         page: {
           tab:"article",
-          articInfo: reuslt
+          articInfo: result
         }
 
       })

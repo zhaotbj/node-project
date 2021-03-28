@@ -5,8 +5,9 @@ const articleSchema = new Schema({
   userName:String, // 用户名
   title: String,
   content:String,
+  md:String, // md语法
   summary: String, //文章简介
-  categoryId: Number, //  文章类型
+  categoryId: String, //  文章类型
   readNumber: Number, // 章阅读量
   commentNumber: Number, // 文章评论数
   thumbUpNumber: Number, // 文章点赞数
