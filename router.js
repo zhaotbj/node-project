@@ -93,9 +93,14 @@ module.exports = (app) => {
     try {
       const result = await Article.findOne({_id:id}).exec();
       const cateInfo = await Category.findOne({_id: result.categoryId})
-       result.createTime = formateTime(result.createTime)
-       result.category = cateInfo.name
-		// return ctx.body={result, cateInfo}
+      if(result.createTime){
+        result.createTime = formateTime(result.createTime)
+      } 
+      if(cateInfo){
+        result.category = cateInfo.name
+      }
+      
+		// return ctx.body={result,cateInfo}
 	
       await ctx.render('index', {
         page: {

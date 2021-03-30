@@ -36,7 +36,7 @@
         display: none;
        }
        .main_container {
-        max-width: 960px;
+        max-width: 55rem;
         margin: 0 auto;
        display: flex;
        justify-content: space-between;
@@ -47,11 +47,19 @@
             background-color: #fff;
             padding:0 0 0 1.5rem;
             height: 100%;
+            position: relative;
         }
     
        .right_container {
          min-width: 270px;
          background-color: #fff;
          margin-left: 1.5rem;
+    }
+    .enter_wrap .md-side{
+        position: absolute;
+        width: 15rem;
+        min-height: 15rem;
+        right: -15.8rem;
+        background-color: #fff;
     }
 }
