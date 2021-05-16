@@ -5,7 +5,7 @@ const path = require("path");
 const fs = require('fs');
 const checkUserStat = require('../middleware/checkUserStat');
 // 上传图片
-router.post("/upload", checkUserStat,  async (ctx) => {
+router.post("/upload",  async (ctx) => {
 	console.log(ctx.request.files.file, 'upload---');
 	try {
 		let { file } = ctx.request.files;
