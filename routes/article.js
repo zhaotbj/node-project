@@ -32,9 +32,9 @@ router.get("/getEssayById", async (ctx) => {
 
 // 添加文章
 router.post("/create",checkUserStat, async (ctx) => {
-  console.log(ctx.request.body, '添加参数');
+  console.log(ctx.query, '添加参数');
   try {
-   const result = await ArticleService.addArticle(ctx.request.body)
+   const result = await ArticleService.addArticle(ctx.query)
     ctx.body = result
   } catch (error) {
     console.log(error)

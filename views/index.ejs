@@ -12,8 +12,20 @@
                  <% }  else if(page.tab==='about') {  -%>
                   <%- include('about', {aboutInfo: page.aboutInfo}); -%>
                   <% }  else if(page.tab==='article') {  -%>
-                   
+                    
                     <%- include('article', {articInfo: page.articInfo}); -%>
+                    <div class="md-side">
+                      <h3>目录</h3>
+                      <ul>
+                        <li>
+                          <a href="">1</a>
+                        </li>
+                      <ul>
+                        <li>
+                          <a href="">2</a>
+                        </li>
+                      </ul>
+                    </div>
                     <% } %>
               
             </div>

@@ -105,13 +105,14 @@ class ArticleService {
 
         try {
             // 执行更新数据
-            const { id, content, title, categoryId, summary, readNumber, commentNumber, thumbUpNumber, createTime } = bodyParams
-            if (!id) return
+            const { id, content, title, categoryId, summary, md, readNumber, commentNumber, thumbUpNumber, createTime } = bodyParams
+            
             const editObj = {
                 content: content,
                 title: title,
                 categoryId: categoryId,
                 summary: summary, //文章简介
+                md: md,
                 readNumber: readNumber, // 章阅读量
                 commentNumber: commentNumber, // 文章评论数
                 thumbUpNumber: thumbUpNumber, // 文章点赞数
