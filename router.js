@@ -76,13 +76,14 @@ module.exports = (app) => {
   });
   
   router.get("/about", async (ctx, next)=> {
-    const data = "<h1>博客简述</h1>\n<p>本博客</p>\n<p> 前端使用服务端渲染(SSR) Nuxt+vue\n后台使用 node+ koa2 + mongoDB</p>\n<p>源码地址 <a href=\"https://github.com/zhaotbj/node-project\">github</a></p>\n<h1>个人介绍</h1>\n<p>联系方式： QQ 975619483 <a href=\"javascript:;\">邮箱： zhaotianbj@163.com</a></p>\n<p>坐标：北京</p>\n<p>其他博客地址： <a href=\"https://juejin.im/user/5c2319a9f265da61117a578f\">掘金</a>  <a href=\"https://zhaotbj.github.io/\">vuePress搭建的github.io</a></p>\n<h1>技能：</h1>\n<ol start=\"\">\n<li>深入理解原生JavaScript，掌握面向对象，原型链的继承机制等，并熟练ES6语法</li>\n<li>react、vue框架熟练使用并拥有相关项目经验！</li>\n<li>微信小程序：熟悉整个开发流程，并实战多个项目，如：精准寻道、寻道sass...</li>\n<li>webpack：熟悉配置，能针对vue项目对脚手架vue.config.js进行性能优化打包配置</li>\n<li>开发工具：vscode、 git</li>\n\n</ol>\n\n"
-      await ctx.render('index', {
-        page: {
-          tab:'about',
-          aboutInfo: data
-        }
-      })
+     const data = 'hello world' // "<h1>博客简述</h1>\n<p>本博客</p>\n<p> 前端使用服务端渲染(SSR) Nuxt+vue\n后台使用 node+ koa2 + mongoDB</p>\n<p>源码地址 <a href=\"https://github.com/zhaotbj/node-project\">github</a></p>\n<h1>个人介绍</h1>\n<p>联系方式： QQ 975619483 <a href=\"javascript:;\">邮箱： zhaotianbj@163.com</a></p>\n<p>坐标：北京</p>\n<p>其他博客地址： <a href=\"https://juejin.im/user/5c2319a9f265da61117a578f\">掘金</a>  <a href=\"https://zhaotbj.github.io/\">vuePress搭建的github.io</a></p>\n<h1>技能：</h1>\n<ol start=\"\">\n<li>深入理解原生JavaScript，掌握面向对象，原型链的继承机制等，并熟练ES6语法</li>\n<li>react、vue框架熟练使用并拥有相关项目经验！</li>\n<li>微信小程序：熟悉整个开发流程，并实战多个项目，如：精准寻道、寻道sass...</li>\n<li>webpack：熟悉配置，能针对vue项目对脚手架vue.config.js进行性能优化打包配置</li>\n<li>开发工具：vscode、 git</li>\n\n</ol>\n\n"
+      // await ctx.render('index', {
+      //   page: {
+      //     tab:'about',
+      //     // aboutInfo: data
+      //   }
+      // })
+      ctx.body = data
   });
 
   router.get("/article/:id", async (ctx, next)=> {

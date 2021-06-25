@@ -9,7 +9,7 @@ router.get("/archives", async(ctx) =>{
 	try {
 		const list = await Article.find();
 	let timearr = [];
-	console.log('list',list)
+	
 	list.map(v =>{
 		let obj = {};
 		obj.time = Number(v.time);
